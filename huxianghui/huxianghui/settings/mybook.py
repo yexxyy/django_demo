@@ -1,5 +1,10 @@
 from settings import *
 
+
+INSTALLED_APPS=BASE_INSTALLED_APPS+PROJECT_APPS
+MIDDLEWARE_CLASSES=BASE_MIDDLEWARE_CLASSES+PROJECT_MIDDLEWARE
+
+
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
