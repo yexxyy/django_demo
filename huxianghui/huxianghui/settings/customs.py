@@ -1,6 +1,6 @@
 
 PROJECT_APPS = [
-    'user_center.apps.User_centerConfig',
+    'main.apps.UserCenterConfig',
 ]
 
 PROJECT_MIDDLEWARE = [
