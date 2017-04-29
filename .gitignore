@@ -92,3 +92,5 @@ ENV/
 .DS
 .DS_Store
 *.pyc
+
+manage.py
