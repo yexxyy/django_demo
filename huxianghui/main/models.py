@@ -58,11 +58,12 @@ class Profile(models.Model):
         ('M', '男'),
         ('F', '女'),
     )
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, verbose_name='性别', blank=True)
-    address = models.CharField(max_length=50, verbose_name='住址', blank=True)
-    regions=models.ManyToManyField(LikeRegion,verbose_name='意向区域',blank=True)
-    styles=models.ManyToManyField(LikeStyle,verbose_name='意向类型',blank=True)
-    email = models.CharField(max_length=30, verbose_name='邮箱')
+    phone=models.CharField(max_length=11,verbose_name='手机',null=False)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, verbose_name='性别', blank=True,null=True)
+    address = models.CharField(max_length=50, verbose_name='住址', blank=True,null=True)
+    regions=models.ManyToManyField(LikeRegion,verbose_name='意向区域',blank=True,null=True)
+    styles=models.ManyToManyField(LikeStyle,verbose_name='意向类型',blank=True,null=True)
+    email = models.CharField(max_length=30, verbose_name='邮箱',null=False)
 
 
     def __str__(self):
