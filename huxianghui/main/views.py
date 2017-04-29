@@ -24,10 +24,13 @@ def signup(request):
         phone=params['phone']
         email=params['email']
         password=params['password']
+        password2=params['password2']
     except:
         return HttpResponseBadRequest('参数不正确')
     if len(password)<6:
         return HttpResponseBadRequest('密码位数不够')
+    elif password!=password2:
+        return HttpResponseBadRequest('密码不一致')
     elif len(phone)!=11:
         return HttpResponseBadRequest('手机号码不正确')
     elif len(email)==0:
