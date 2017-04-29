@@ -98,7 +98,7 @@ class Banner(models.Model):
     class Meta:
         verbose_name = '顶部广告'
         verbose_name_plural = '顶部广告'
-    newslink=models.ForeignKey(News,on_delete=models.CASCADE)
+    news_link=models.ForeignKey(News,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.newslink
+        return self.news_link.news_name
