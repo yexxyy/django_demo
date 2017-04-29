@@ -33,4 +33,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-
+MEDIA_ROOT = '/Users/yetongxue/Desktop/assets_upload'

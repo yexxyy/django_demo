@@ -1,11 +1,23 @@
 #-*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import os
+from uuid import uuid4
+
 from django.db import models
 
 # Create your models here.
 from django.utils.encoding import python_2_unicode_compatible
 from django.contrib.auth.models import User, Group
+
+
+#图片上传路径
+def pic_upload_path(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = '{}.{}'.format(uuid4().hex, ext)
+    return os.path.join('records/', filename)
+
+
 
 
 ###################个人中心start##################
@@ -62,3 +74,31 @@ class Profile(models.Model):
 
 
 ###################start##################
+@python_2_unicode_compatible
+class News(models.Model):
+    class Meta:
+        verbose_name='新闻'
+        verbose_name_plural='新闻'
+
+    news_img=models.ImageField(
+        upload_to=pic_upload_path,
+        verbose_name='链接'
+    )
+    news_name=models.CharField(max_length=20,verbose_name='名称',default='')
+
+    def __str__(self):
+        return self.news_name
+
+    def get_imgurl(self):
+        return self.news_img.url if self.news_img else ''
+
+
+@python_2_unicode_compatible
+class Banner(models.Model):
+    class Meta:
+        verbose_name = '顶部广告'
+        verbose_name_plural = '顶部广告'
+    newslink=models.ForeignKey(News,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.newslink
