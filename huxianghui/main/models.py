@@ -15,7 +15,7 @@ from django.contrib.auth.models import User, Group
 def pic_upload_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = '{}.{}'.format(uuid4().hex, ext)
-    return os.path.join('records/', filename)
+    return os.path.join('main/', filename)
 
 
 
@@ -61,8 +61,8 @@ class Profile(models.Model):
     phone=models.CharField(max_length=11,verbose_name='手机',null=False)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, verbose_name='性别', blank=True,null=True)
     address = models.CharField(max_length=50, verbose_name='住址', blank=True,null=True)
-    regions=models.ManyToManyField(LikeRegion,verbose_name='意向区域',blank=True,null=True)
-    styles=models.ManyToManyField(LikeStyle,verbose_name='意向类型',blank=True,null=True)
+    regions=models.ManyToManyField(LikeRegion,verbose_name='意向区域',blank=True)
+    styles=models.ManyToManyField(LikeStyle,verbose_name='意向类型',blank=True)
     email = models.CharField(max_length=30, verbose_name='邮箱',null=False)
 
 
