@@ -114,7 +114,8 @@ def passwd_page(request):
 @csrf_exempt
 def reset_passwd(request):
 
-    return HttpResponse('重置成功')
+    message='成功'
+    return render(request,'reset_result.html',{'message':message})
 
 
 
