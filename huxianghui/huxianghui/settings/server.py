@@ -33,6 +33,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-STATIC_ROOT = os.path.join(os.path.abspath(os.path.join(BASE_DIR,os.pardir,os.pardir)), "static/")
+STATIC_ROOT = '/root/huxianghui_all/static'
 
 MEDIA_ROOT = '/root/huxianghui_all/assets'
