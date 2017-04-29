@@ -7,3 +7,4 @@ PROJECT_MIDDLEWARE = [
 ]
 
 
+AUTH_PROFILE_MODULE = 'main.Profile'

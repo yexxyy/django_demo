@@ -6,8 +6,8 @@ from django.contrib import admin
 from .models import *
 
 admin.site.register(Profile)
-admin.site.register(LikeRegion)
-admin.site.register(LikeStyle)
+# admin.site.register(LikeRegion)
+# admin.site.register(LikeStyle)
 admin.site.register(News)
 admin.site.register(Banner)
 admin.site.register(Building)
