@@ -2,7 +2,9 @@
 
 URL: http://0.0.0.0:8101/main/ + ...
 
-### 注册登录
+### 个人中心
+
+---
 
 #### 注册:signup(post)
 >phone(11) email password(>6) password2
@@ -12,6 +14,15 @@ URL: http://0.0.0.0:8101/main/ + ...
 
 #### 登出:signout(get)
 
+#### 忘记密码：forget(post)
+>email
+
+#### 修改密码：change_passwd（login_required / post）
+>old_passwd  password0(>=6)  password1
+
+
+
+---
 
 
 
