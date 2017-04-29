@@ -24,6 +24,9 @@ def pic_upload_path(instance, filename):
 
 @python_2_unicode_compatible
 class LikeRegion(models.Model):
+    class Meta:
+        verbose_name = '意向区域'
+        verbose_name_plural = '意向区域'
     region=models.CharField(max_length=10,verbose_name='区域')
 
     def __str__(self):
@@ -33,6 +36,9 @@ class LikeRegion(models.Model):
 
 @python_2_unicode_compatible
 class LikeStyle(models.Model):
+    class Meta:
+        verbose_name = '意向类型'
+        verbose_name_plural = '意向类型'
     styles=models.CharField(max_length=10,verbose_name='类型')
 
     def __str__(self):
@@ -70,10 +76,10 @@ class Profile(models.Model):
 
 
 
-###################个人中心结束##################
+################### 个人中心结束 ##################
 
 
-###################start##################
+################### Index start ##################
 @python_2_unicode_compatible
 class News(models.Model):
     class Meta:
@@ -82,7 +88,7 @@ class News(models.Model):
 
     news_img=models.ImageField(
         upload_to=pic_upload_path,
-        verbose_name='链接'
+        verbose_name='图片'
     )
     news_name=models.CharField(max_length=20,verbose_name='名称',default='')
 
@@ -102,3 +108,50 @@ class Banner(models.Model):
 
     def __str__(self):
         return self.news_link.news_name
+
+################### Index end ##################
+
+
+################### building start ##################
+@python_2_unicode_compatible
+class Building(models.Model):
+    class Meta:
+        verbose_name = '楼盘展示'
+        verbose_name_plural = '楼盘展示'
+
+    title=models.CharField(max_length=50,verbose_name='标题')
+    img=models.ImageField(upload_to=pic_upload_path,verbose_name='图片')
+    location=models.CharField(max_length=70,verbose_name='位置')
+    phone=models.CharField(max_length=11,verbose_name='电话')
+    price=models.FloatField(verbose_name='价格')
+
+    def __str__(self):
+        return self.title
+
+
+@python_2_unicode_compatible
+class UserLike(models.Model):
+    class Meta:
+        verbose_name='用户收藏'
+        verbose_name_plural='用户收藏'
+    user=models.OneToOneField(User,on_delete=models.CASCADE)
+    liked=models.ManyToManyField(Building,verbose_name='已收藏',blank=True)
+
+    def __str__(self):
+        return self.user.name
+
+
+
+
+
+
+
+################### building end ##################
+
+
+
+
+
+
+
+
