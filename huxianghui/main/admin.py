@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 from django.contrib import admin
 
 # Register your models here.
@@ -29,3 +30,4 @@ class ProfileInline(admin.StackedInline):
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
     inlines = (ProfileInline,)
+

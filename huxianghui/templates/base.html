@@ -1,0 +1,18 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<title>{% block title %}狐享会{% endblock %}</title>
+	{% include "headers.html" %}
+	{% block headers %}{% endblock %}
+</head>
+<body>
+
+{% block content %}{% endblock %}
+
+
+
+<script src="{% static 'js/jQuery-2.2.0.min.js' %}"></script>
+<script src="{% static 'js/utils.js' %}"></script>
+</body>
+</html>

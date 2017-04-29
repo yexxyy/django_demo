@@ -104,10 +104,7 @@ class News(models.Model):
         verbose_name='新闻'
         verbose_name_plural='新闻'
 
-    news_img=models.ImageField(
-        upload_to=pic_upload_path,
-        verbose_name='图片'
-    )
+    news_url=models.CharField(max_length=200,verbose_name='链接',default='')
     news_name=models.CharField(max_length=20,verbose_name='名称',default='')
 
     def __str__(self):
@@ -139,9 +136,9 @@ class Building(models.Model):
 
     title=models.CharField(max_length=50,verbose_name='标题')
     img=models.ImageField(upload_to=pic_upload_path,verbose_name='图片')
-    location=models.CharField(max_length=70,verbose_name='位置')
+    location=models.CharField(max_length=70,verbose_name='位置',choices=LOCATIONS)
     phone=models.CharField(max_length=11,verbose_name='电话')
-    price=models.FloatField(verbose_name='价格')
+    price=models.CharField(max_length=20,verbose_name='价格',choices=PRICE_SECTIONS)
 
     def __str__(self):
         return self.title

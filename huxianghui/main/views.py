@@ -1,13 +1,14 @@
 #-*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import render
-
+from huxianghui.settings import settings
 # Create your views here.
 
 
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST, require_GET
+from django.views.decorators.http import require_POST, require_GET, logger
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -72,3 +73,49 @@ def signin(request):
 def signout(request):
     logout(request)
     return HttpResponse('登出成功')
+
+
+@require_POST
+@csrf_exempt
+def forget_passwd(request):
+    params=request.POST
+    try:
+        email=params['email']
+    except:
+        return HttpResponseBadRequest('参数不正确')
+    user = authenticate(email=email,)
+    if user is None:
+        try:
+            subject = '重置登录密码-狐享会'
+            link="{}/main/passwd_page/{}".format(settings.SERVER_HOST,'?code=18280082093')
+            html_message = '<b>重置链接：</b><a href="%s">%s</a>' % (link,link)
+
+            send_mail(
+                subject=subject,
+                message='',
+                from_email='email-help@foxmail.com',  # from
+                recipient_list=['yeliphoto@qq.com',],  # to
+                html_message=html_message,
+            )
+            return HttpResponse('密码重置链接已发送至您的邮箱')
+        except Exception as e:
+            logger.error(e)
+            return HttpResponseBadRequest(e)
+    return HttpResponseBadRequest('用户不存在')
+
+@require_GET
+def passwd_page(request):
+    code=request.GET.get('code')
+    print code
+    return render(request,'reset_passwd.html')
+
+
+@require_POST
+@csrf_exempt
+def reset_passwd(request):
+
+    return HttpResponse('重置成功')
+
+
+
+
