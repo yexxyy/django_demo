@@ -108,10 +108,9 @@ def forget_passwd(request):
 @require_GET
 def passwd_page(request):
     code=request.GET.get('code')
-    user=authenticate(username=code)
-    tempuser=User.objects.filter(username=code)
-    print tempuser
+    user = User.objects.get(username=code)
     if user is not None:
+        user.backend = 'django.contrib.auth.backends.ModelBackend'
         login(request, user)
         return render(request, 'reset_passwd.html')
     return HttpResponse('出现了错误')
@@ -128,16 +127,20 @@ def reset_passwd(request):
     try:
         password1=params['password1']
         password0=params['password0']
+        if len(password0) < 6:
+            message = '{}{}'.format(base_string, '密码长度太短')
+        elif password0 != password1:
+            message = '{}{}'.format(base_string, '两次输入的密码不一致')
+        else:
+            try:
+                user.set_password(password0)
+                user.save()
+                message = '{}{}'.format(base_string, '密码重置成功')
+            except:
+                message = '{}{}'.format(base_string, '密码重置失败')
     except:
         message='{}{}'.format(base_string,'参数错误，请重新提交')
-    if password0!=password1:
-        message = '{}{}'.format(base_string, '两次密码输入不一致')
-    try:
-        user.set_password(password0)
-        user.save()
-        message = '{}{}'.format(base_string, '密码重置成功')
-    except:
-        message = '{}{}'.format(base_string, '密码重置失败')
+
     return render(request,'reset_result.html',{'message':message})
 
 
