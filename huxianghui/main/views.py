@@ -144,5 +144,29 @@ def reset_passwd(request):
     return render(request,'reset_result.html',{'message':message})
 
 
+@csrf_exempt
+@require_POST
+@login_required
+def change_passwd(request):
+    params=request.POST
+    user=request.user
+    try:
+        old_passwd=params['old_passwd']
+        password0=params['password0']
+        password1 = params['password1']
+        user = authenticate(username=user.username, password=old_passwd)
+        if user is None:
+            return HttpResponseBadRequest('旧密码不正确')
+        elif len(password0)<6:
+            return HttpResponseBadRequest('密码长度太短')
+        elif password0!=password1:
+            return HttpResponseBadRequest('两次输入的密码不一致')
+        else:
+            user.set_password(password0)
+            user.save()
+            return HttpResponse('密码修改成功')
+
+    except:
+        return HttpResponseBadRequest('参数不正确')
 
 

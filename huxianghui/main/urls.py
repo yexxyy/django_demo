@@ -10,7 +10,7 @@ urlpatterns=[
     url(r'signout/$',views.signout),
     url(r'forget/$' ,views.forget_passwd),
     url(r'passwd_page\/?',views.passwd_page),
-    url(r'resetpasswd/$',views.reset_passwd),
-
+    url(r'reset_passwd/$',views.reset_passwd),
+    url(r'change_passwd/$',views.change_passwd),
 
 ]
