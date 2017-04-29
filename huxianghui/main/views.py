@@ -83,18 +83,19 @@ def forget_passwd(request):
         email=params['email']
     except:
         return HttpResponseBadRequest('参数不正确')
-    user = authenticate(email=email,)
-    if user is None:
+    user = User.objects.get(email=email)
+    print user
+    if user is not None:
         try:
             subject = '重置登录密码-狐享会'
-            link="{}/main/passwd_page/{}".format(settings.SERVER_HOST,'?code=18280082093')
+            link="{}/main/passwd_page/?code={}".format(settings.SERVER_HOST,user.username)
             html_message = '<b>重置链接：</b><a href="%s">%s</a>' % (link,link)
 
             send_mail(
                 subject=subject,
                 message='',
                 from_email='email-help@foxmail.com',  # from
-                recipient_list=['yeliphoto@qq.com',],  # to
+                recipient_list=[user.email,],  # to
                 html_message=html_message,
             )
             return HttpResponse('密码重置链接已发送至您的邮箱')
@@ -103,18 +104,40 @@ def forget_passwd(request):
             return HttpResponseBadRequest(e)
     return HttpResponseBadRequest('用户不存在')
 
+
 @require_GET
 def passwd_page(request):
     code=request.GET.get('code')
-    print code
-    return render(request,'reset_passwd.html')
+    user=authenticate(username=code)
+    tempuser=User.objects.filter(username=code)
+    print tempuser
+    if user is not None:
+        login(request, user)
+        return render(request, 'reset_passwd.html')
+    return HttpResponse('出现了错误')
 
 
-@require_POST
+
 @csrf_exempt
+@require_POST
+@login_required
 def reset_passwd(request):
-
-    message='成功'
+    params=request.POST
+    user = request.user
+    base_string='尊敬的狐享会用户：'
+    try:
+        password1=params['password1']
+        password0=params['password0']
+    except:
+        message='{}{}'.format(base_string,'参数错误，请重新提交')
+    if password0!=password1:
+        message = '{}{}'.format(base_string, '两次密码输入不一致')
+    try:
+        user.set_password(password0)
+        user.save()
+        message = '{}{}'.format(base_string, '密码重置成功')
+    except:
+        message = '{}{}'.format(base_string, '密码重置失败')
     return render(request,'reset_result.html',{'message':message})
 
 
