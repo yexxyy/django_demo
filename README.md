@@ -6,32 +6,32 @@ URL: http://0.0.0.0:8101/main/ + ...
 
 ---
 
-注册:signup/(post)
+#### 注册:signup/(post)
 >phone(11) email password(>6) password2
 
-登录:signin/(post)
+#### 登录:signin/(post)
 >phone(11) password
 
-登出:signout/(get)
+#### 登出:signout/(get)
 
-忘记密码：forget/(post)
+#### 忘记密码：forget/(post)
 >email
 
-修改密码：change_passwd/（login_required / post）
+#### 修改密码：change_passwd/（login_required / post）
 >old_passwd  password0(>=6)  password1
 
 ---
 
 ## *Banner and News*
 
-获取Banners：get_banners／（get）
-获取News：get_news／（get）
+#### 获取Banners：get_banners／（get）
+#### 获取News：get_news／（get）
 
 ## *楼盘展示*
 
-分页获取楼盘列表：bulidings/1/ (get)
+#### 分页获取楼盘列表：bulidings/1/ (get)
 
-条件筛选楼盘：buildings_condition／（post）(三个参数都不传返回所有数据)
+#### 条件筛选楼盘：buildings_condition／（post）(三个参数都不传返回所有数据)
 >location : LOCATIONS=(
     ('jinjiang', '锦江'),('qingyangqu','青羊'),('jinniu','金牛'),('wuhou','武侯'),('chenghua','成华'),
     ('gaoxing','高新区'),('gaoxingxiqu','高新西区'),('wenjaing','温江'),('shuangliu','双流'), ('longquanyi','龙泉驿'),
@@ -50,8 +50,26 @@ URL: http://0.0.0.0:8101/main/ + ...
 
 ## *活动*
 
-获取活动列表：get_activitys（get）
+#### 获取活动列表：get_activitys（get）
 
-获取活动收集的用户字段：get_collect_items/1/ （get）
+#### 获取活动收集的用户字段：get_collect_items/1/ （get）
 
+结果样例：
 
+```
+
+{
+  "activity_id": 1,
+  "list": [
+    {
+      "id": 8,
+      "name": "手机"
+    },
+    {
+      "id": 9,
+      "name": "联系地址"
+    }
+  ],
+  "message": "获取收集字段列表成功"
+}
+```
