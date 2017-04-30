@@ -222,11 +222,6 @@ def get_buildings(request,page):
     })
 
 
-def get_condition(condition,param):
-    if len(param)!=0:
-        condition=param
-    else:
-        pass
 
 @require_POST
 @csrf_exempt

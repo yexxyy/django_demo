@@ -123,7 +123,7 @@ class Banner(models.Model):
 
     cover = models.ImageField(upload_to=pic_upload_path, verbose_name='封面图',default='')
     detail_url = models.CharField(max_length=100, verbose_name='详情链接',default='')
-    recommend_id = models.CharField(max_length=10, verbose_name='推荐指数', choices=RECOMMADN_IDS,blank=True)
+    recommend_id = models.IntegerField(verbose_name='推荐指数(填写：1、2、3...)')
 
     def get_cover_url(self):
         return self.cover.url if self.cover else ''
@@ -160,7 +160,7 @@ class Building(models.Model):
     class Meta:
         verbose_name = '楼盘展示'
         verbose_name_plural = '楼盘展示'
-    recommend_id=models.CharField(max_length=5,verbose_name='推荐指数',choices=RECOMMADN_IDS,blank=True)
+    recommend_id = models.IntegerField(verbose_name='推荐指数(填写：1、2、3...)')
     title=models.CharField(max_length=50,verbose_name='标题')
     cover=models.ImageField(upload_to=pic_upload_path,verbose_name='封面图')
     location=models.CharField(max_length=70,verbose_name='位置',choices=LOCATIONS,blank=True)
@@ -229,7 +229,7 @@ class Activity(models.Model):
     class Meta:
         verbose_name='活动列表'
         verbose_name_plural='活动列表'
-    recommend_id=models.CharField(max_length=10,verbose_name='推荐指数',choices=RECOMMADN_IDS)
+    recommend_id=models.IntegerField(verbose_name='推荐指数(填写：1、2、3...)')
     title=models.CharField(max_length=30,verbose_name='标题')
     cover = models.ImageField(upload_to=pic_upload_path, verbose_name='封面图')
     detail_url=models.CharField(max_length=100,verbose_name='详情链接')
