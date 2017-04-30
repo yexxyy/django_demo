@@ -300,8 +300,37 @@ def get_collect_items(request,activity_id):
         return HttpResponseBadRequest('参数错误')
 
 
-# @require_POST
-# @csrf_exempt
+@require_POST
+@csrf_exempt
+def save_paticipator_info(request):
+    params=request.POST
+    user=request.user
+    activity_id = params.get('activity_id')
+    name = params.get('name')
+    phone = params.get('phone')
+    age = params.get('age')
+    address = params.get('address')
+    try:
+        try:
+            activity = Activity.objects.get(pk=activity_id)
+        except:
+            return HttpResponseBadRequest('无相关活动')
+        participatorsed=activity.participator
+        is_registered=False
+        for par in participatorsed:
+            if par.phone==phone:
+                is_registered=True
+        if is_registered:
+            return HttpResponseBadRequest('您已经报名，请勿重复提交')
+        else:
+            participator = ParticipatorInfo(name=name, phone=phone, age=age, address=address, user=user)
+            participator.save()
+            return HttpResponse('报名成功')
+    except:
+        return HttpResponseBadRequest('报名失败,请重试')
+
+
+
 
 
 

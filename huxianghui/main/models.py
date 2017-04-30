@@ -267,7 +267,7 @@ class ParticipatorInfo(models.Model):
     user=models.ForeignKey(User,related_name='user_info',verbose_name='关联用户')
 
     def __str__(self):
-        return self.name
+        return self.name if self.name else ''
 
 
 
