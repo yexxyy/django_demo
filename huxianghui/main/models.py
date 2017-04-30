@@ -145,6 +145,7 @@ class Banner(models.Model):
             'detail_url':self.detail_url,
             'recommend_id':self.recommend_id,
         }
+        return this
 
 ################### Index end ##################
 
