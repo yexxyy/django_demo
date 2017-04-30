@@ -1,12 +1,8 @@
 #-*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
-from django.http import HttpResponse
 from django.shortcuts import render
 from huxianghui.settings import settings
-# Create your views here.
-
-
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST, require_GET, logger
 from rest_framework import status
@@ -16,6 +12,8 @@ from django.http import HttpResponse, JsonResponse, HttpResponseNotFound, HttpRe
 from models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+import base64
+
 
 
 #个人中心
@@ -81,14 +79,13 @@ def forget_passwd(request):
     params=request.POST
     try:
         email=params['email']
+        user = User.objects.get(email=email)
     except:
-        return HttpResponseBadRequest('参数不正确')
-    user = User.objects.get(email=email)
-    print user
+        return HttpResponseBadRequest('邮箱不正确')
     if user is not None:
         try:
             subject = '重置登录密码-狐享会'
-            link="{}/main/passwd_page/?code={}".format(settings.SERVER_HOST,user.username)
+            link="{}/main/passwd_page/?code={}".format(settings.SERVER_HOST,base64.b64encode(user.username))
             html_message = '<b>重置链接：</b><a href="%s">%s</a>' % (link,link)
 
             send_mail(
@@ -108,7 +105,8 @@ def forget_passwd(request):
 @require_GET
 def passwd_page(request):
     code=request.GET.get('code')
-    user = User.objects.get(username=code)
+    decode_str=base64.b64decode(code)
+    user = User.objects.get(username=decode_str)
     if user is not None:
         user.backend = 'django.contrib.auth.backends.ModelBackend'
         login(request, user)
