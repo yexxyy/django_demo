@@ -267,7 +267,7 @@ class ParticipatorInfo(models.Model):
     user=models.ForeignKey(User,related_name='user_info',verbose_name='关联用户')
 
     def __str__(self):
-        return self.name if self.name else ''
+        return '用户id：{}。报名信息：姓名-{}，手机-{}，年龄-{}，地址-{}'.format(self.user.username,self.name,self.phone,self.age,self.address)
 
 
 
@@ -281,7 +281,7 @@ class Activity(models.Model):
     detail_url=models.CharField(max_length=100,verbose_name='详情链接')
     limit_num=models.IntegerField(verbose_name='人数上限')
     collect_item=models.ManyToManyField(CollectItem,verbose_name='请选择您想收集的用户信息')
-    participator=models.ManyToManyField(ParticipatorInfo,verbose_name='已报名用户')
+    participator=models.ManyToManyField(ParticipatorInfo,verbose_name='已报名用户',blank=True)
 
     def __str__(self):
         return self.title

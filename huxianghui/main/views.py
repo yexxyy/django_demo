@@ -315,7 +315,7 @@ def save_paticipator_info(request):
             activity = Activity.objects.get(pk=activity_id)
         except:
             return HttpResponseBadRequest('无相关活动')
-        participatorsed=activity.participator
+        participatorsed=activity.participator.all()
         is_registered=False
         for par in participatorsed:
             if par.phone==phone:
@@ -325,6 +325,8 @@ def save_paticipator_info(request):
         else:
             participator = ParticipatorInfo(name=name, phone=phone, age=age, address=address, user=user)
             participator.save()
+            activity.participator.add(participator)
+            activity.save()
             return HttpResponse('报名成功')
     except:
         return HttpResponseBadRequest('报名失败,请重试')

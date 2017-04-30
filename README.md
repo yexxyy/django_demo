@@ -73,3 +73,7 @@ URL: http://0.0.0.0:8101/main/ + ...
   "message": "获取收集字段列表成功"
 }
 ```
+
+#### 活动报名：post_participator_info/（post）
+
+>name phone age address (全部选填)
