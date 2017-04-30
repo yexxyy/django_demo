@@ -2,7 +2,7 @@ import os
 from PIL import Image
 from django.http import HttpResponse
 from django.views.decorators.http import require_GET
-from huxianghui.settings.mybook import MEDIA_ROOT
+from huxianghui.settings.server import MEDIA_ROOT
 
 
 @require_GET
