@@ -2,11 +2,15 @@
 
 PROJECT_APPS = [
     'main.apps.UserCenterConfig',
+    'corsheaders',
 ]
 
 PROJECT_MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
+CORS_ORIGIN_ALLOW_ALL=True
 
 AUTH_PROFILE_MODULE = 'main.Profile'
 
