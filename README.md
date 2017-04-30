@@ -4,8 +4,6 @@ URL: http://0.0.0.0:8101/main/ + ...
 
 ## *个人中心*
 
----
-
 #### 注册:signup/(post)
 >phone(11) email password(>6) password2
 
@@ -25,16 +23,40 @@ URL: http://0.0.0.0:8101/main/ + ...
 
 #### 获取用户收藏：get_user_likes/ （login_required／get）
 
----
+
+
 
 ## *Banner and News*
 
 #### 获取Banners：get_banners／（get）
 #### 获取News：get_news／（get）
 
+
+
+
+
+
 ## *楼盘展示*
 
 #### 分页获取楼盘列表：bulidings/1/ (get)
+结果样例：
+```
+{
+  "message": "获取楼盘列表成功成功",
+  "list": [
+    {
+      "phone": "18280082093",
+      "location": "chenghua",
+      "title": "我是楼盘标题",
+      "recommend_id": 3,
+      "price": 23243,
+      "detail_url": "links",
+      "cover": "/assets/main/56b62f80201d462bada9054ec1117fa3.jpg",
+      "id": 2
+    }
+  ]
+}
+```
 
 #### 条件筛选楼盘：buildings_condition／（post）(三个参数都不传返回所有数据)
 >location : LOCATIONS=(
@@ -51,6 +73,9 @@ URL: http://0.0.0.0:8101/main/ + ...
 >price_section:PRICE_SECTIONS=(
     ('one','3000以下'), ('two','3000-5000'), ('three','5000-7000'), ('four','7000-9000'), ('five','9000-11000'), ('size','11000-15000'), ('seven','15000-20000'),('eight','20000以上'),
 )
+
+
+
 
 
 ## *活动*
