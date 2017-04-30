@@ -245,6 +245,13 @@ class CollectItem(models.Model):
         if is_added==False:
             super(CollectItem, self).save(*args, **kwargs)
 
+    def to_json(self):
+        this={
+            'id':self.pk,
+            'name':self.name,
+        }
+        return this
+
 
 class Activity(models.Model):
     class Meta:

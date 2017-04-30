@@ -52,4 +52,6 @@ URL: http://0.0.0.0:8101/main/ + ...
 
 获取活动列表：get_activitys（get）
 
+获取活动收集的用户字段：get_collect_items/1/ （get）
+
 

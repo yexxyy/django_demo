@@ -277,6 +277,29 @@ def get_activitys(requset):
         return HttpResponse('获取活动列表失败')
 
 
+@csrf_exempt
+@require_GET
+def get_collect_items(request,activity_id):
+    user=request.user
+    try:
+        temp_id=int(activity_id)
+        activity = Activity.objects.get(pk=temp_id)
+        if activity is not None:
+            collect_items=activity.collect_item.all()
+            json_list=[]
+            for item in collect_items:
+                json_list.append(item.to_json())
+            return JsonResponse({
+                'list':json_list,
+                'activity_id':temp_id,
+                'message':'获取收集字段列表成功'
+            })
+        else:
+            return HttpResponseBadRequest('活动不存在')
+    except:
+        return HttpResponseBadRequest('参数错误')
+
+
 
 
 
