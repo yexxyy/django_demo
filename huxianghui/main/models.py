@@ -82,6 +82,7 @@ class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     name=models.CharField(max_length=20,verbose_name='姓名',null=True,blank=True,default='')
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, verbose_name='性别', blank=True,null=True)
+    age=models.IntegerField(verbose_name='年龄',blank=True,null=True)
     address = models.CharField(max_length=50, verbose_name='住址',blank=True,default='')
     regions=models.CharField(max_length=10,choices=LOCATIONS,verbose_name='意向区域',blank=True)
     styles=models.CharField(max_length=10,choices=BUILDING_TYPE,verbose_name='意向类型',blank=True)
@@ -107,8 +108,8 @@ class News(models.Model):
         verbose_name='新闻链接'
         verbose_name_plural='新闻链接'
 
-    news_url=models.CharField(max_length=200,verbose_name='链接',default='')
     news_name=models.CharField(max_length=20,verbose_name='名称',default='')
+    news_url = models.CharField(max_length=200, verbose_name='链接', default='')
 
     def __str__(self):
         return self.news_name
