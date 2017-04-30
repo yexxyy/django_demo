@@ -182,17 +182,34 @@ def get_buildings(request,page):
     for building in buildings:
         json_list.append(building.to_json())
     if len(json_list)==0:
-        message='暂无更多数据'
+        message='暂无更多楼盘信息'
     else:
-        message='获取列表成功'
+        message='获取楼盘信息成功'
     return JsonResponse({
         'list':json_list,
         'message':message,
     })
 
+@require_POST
+@csrf_exempt
+def get_buildings_condition(request):
+    params=request.POST
+    location = params.get('location')
+    area_section= params.get('area_section')
+    price_section= params.get('price_section')
+    buildings=Building.objects.filter(location=location,area_section=area_section,price_section=price_section)
+    json_list=[]
+    for building in buildings:
+        json_list.append(building.to_json)
 
-
-
+    if len(json_list) == 0:
+        message = '此条件下无相关楼盘信息'
+    else:
+        message = '获取楼盘信息成功'
+    return JsonResponse({
+        'list':json_list,
+        'message':message,
+    })
 
 
 
