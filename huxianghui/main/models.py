@@ -196,6 +196,7 @@ class Building(models.Model):
             'detail_url': self.detail_url,
             'price': self.price,
             'recommend_id': self.recommend_id,
+            'phone':self.phone,
         }
         return this
 
