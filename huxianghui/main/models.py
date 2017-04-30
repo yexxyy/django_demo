@@ -40,7 +40,12 @@ BUILDING_TYPE=(
 AREA_SECCTIONS=(
     ('one','50㎡以下'), ('two','50-70㎡'), ('three','70-90㎡'), ('four','90-110㎡'), ('five','110-150㎡'), ('six','150-200㎡'), ('seven','200-300㎡'),('eight','300㎡以上'),
 )
-
+HOUSE_TYPE=(
+    ('one','一居'),('two','二居'),('three','三居'),('four','四居'),('five','五居'),('six','五居以上'),
+)
+RECOMMADN_IDS=(
+    ('1','一颗星'),('2','两颗星'),('3','三颗星'),('4','四颗星'),('5','五颗星')
+)
 
 ###################个人中心start##################
 
@@ -56,15 +61,7 @@ AREA_SECCTIONS=(
 #
 #
 #
-# @python_2_unicode_compatible
-# class LikeStyle(models.Model):
-#     class Meta:
-#         verbose_name = '意向类型'
-#         verbose_name_plural = '意向类型'
-#     styles=models.CharField(max_length=10,verbose_name='类型')
-#
-#     def __str__(self):
-#         return self.styles
+
 
 
 @python_2_unicode_compatible
@@ -124,17 +121,36 @@ class Banner(models.Model):
 
 
 ################### building start ##################
+
+@python_2_unicode_compatible
+class HouseType(models.Model):
+    class Meta:
+        verbose_name = '楼盘户型'
+        verbose_name_plural = '楼盘户型'
+    house_type=models.CharField(max_length=10,verbose_name='户型',choices=HOUSE_TYPE)
+
+    def __str__(self):
+        return self.house_type
+
+
 @python_2_unicode_compatible
 class Building(models.Model):
     class Meta:
         verbose_name = '楼盘展示'
         verbose_name_plural = '楼盘展示'
-
+    recommend_id=models.CharField(max_length=5,verbose_name='推荐指数',choices=RECOMMADN_IDS,blank=True)
     title=models.CharField(max_length=50,verbose_name='标题')
-    img=models.ImageField(upload_to=pic_upload_path,verbose_name='图片')
-    location=models.CharField(max_length=70,verbose_name='位置',choices=LOCATIONS)
-    phone=models.CharField(max_length=11,verbose_name='电话')
-    price=models.CharField(max_length=20,verbose_name='价格',choices=PRICE_SECTIONS)
+    cover=models.ImageField(upload_to=pic_upload_path,verbose_name='封面图')
+    location=models.CharField(max_length=70,verbose_name='位置',choices=LOCATIONS,blank=True)
+    metro=models.CharField(max_length=10,verbose_name='周边地铁',choices=METRO,blank=True)
+    price_section=models.CharField(max_length=10,verbose_name='价格区间',choices=PRICE_SECTIONS,blank=True)
+    house_type=models.ManyToManyField(HouseType,verbose_name='户型')
+    building_type=models.CharField(max_length=10,verbose_name='楼盘类型',choices=BUILDING_TYPE,blank=True)
+    area_section=models.CharField(max_length=15,verbose_name='面积区间',choices=AREA_SECCTIONS,blank=True)
+    open_date=models.DateField(verbose_name='开盘时间')
+    detail_url=models.CharField(max_length=100,verbose_name='详情链接')
+    phone=models.CharField(max_length=11,verbose_name='联系电话')
+    price=models.FloatField(verbose_name='价格(元)')
 
     def __str__(self):
         return self.title
