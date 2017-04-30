@@ -66,7 +66,7 @@ def signin(request):
     return HttpResponseBadRequest('账号或密码不对')
 
 
-
+@csrf_exempt
 @require_GET
 def signout(request):
     logout(request)
