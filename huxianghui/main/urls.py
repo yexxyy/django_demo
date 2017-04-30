@@ -19,4 +19,6 @@ urlpatterns=[
 
     url(r'^bulidings/(?P<page>\d+)/$', views.get_buildings),
     url(r'^buildings_condition/$',views.get_buildings_condition),
+
+    url(r'^get_activitys/$',views.get_activitys),
 ]

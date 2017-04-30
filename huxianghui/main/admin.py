@@ -8,16 +8,13 @@ from .models import *
 from django import forms
 
 
-# admin.site.register(Profile)
 admin.site.unregister(User)
-# admin.site.register(LikeRegion)
-# admin.site.register(LikeStyle)
 admin.site.register(News)
 admin.site.register(Banner)
 admin.site.register(Building)
-admin.site.register(HouseType)
 admin.site.register(UserLike)
-
+admin.site.register(Activity)
+admin.site.register(CollectItem)
 
 class ProfileForm(forms.ModelForm):
 	class Meta:

@@ -48,6 +48,8 @@ URL: http://0.0.0.0:8101/main/ + ...
 )
 
 
+## *活动*
 
+获取活动列表：get_activitys（get）
 
 

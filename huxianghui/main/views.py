@@ -267,6 +267,19 @@ def get_buildings_condition(request):
     })
 
 
+@require_GET
+def get_activitys(requset):
+    try:
+        activitys = Activity.objects.all()
+        json_list = []
+        for activity in activitys:
+            json_list.append(activity.to_json())
+        return JsonResponse({
+            'list': json_list,
+            'message': '获取活动列表成功',
+        })
+    except:
+        return HttpResponse('获取活动列表失败')
 
 
 

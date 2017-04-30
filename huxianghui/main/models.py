@@ -33,13 +33,15 @@ METRO=(
 )
 
 PRICE_SECTIONS=(
-    ('one','3000以下'), ('two','3000-5000'), ('three','5000-7000'), ('four','7000-9000'), ('five','9000-11000'), ('size','11000-15000'), ('seven','15000-20000'),('eight','20000以上'),
+    ('one','3000以下'), ('two','3000-5000'), ('three','5000-7000'), ('four','7000-9000'),
+    ('five','9000-11000'), ('size','11000-15000'), ('seven','15000-20000'),('eight','20000以上'),
 )
 BUILDING_TYPE=(
     ('one','普通住宅'), ('two','花园洋房'), ('three','别墅'), ('four','商铺'), ('five','写字楼'), ('six','公寓）'),
 )
 AREA_SECCTIONS=(
-    ('one','50㎡以下'), ('two','50-70㎡'), ('three','70-90㎡'), ('four','90-110㎡'), ('five','110-150㎡'), ('six','150-200㎡'), ('seven','200-300㎡'),('eight','300㎡以上'),
+    ('one','50㎡以下'), ('two','50-70㎡'), ('three','70-90㎡'), ('four','90-110㎡'),
+    ('five','110-150㎡'), ('six','150-200㎡'), ('seven','200-300㎡'),('eight','300㎡以上'),
 )
 HOUSE_TYPE=(
     ('一居','一居'),('二居','二居'),('三居','三居'),('四居','四居'),('五居','五居'),('五居以上','五居以上'),
@@ -106,6 +108,7 @@ class News(models.Model):
 
     def to_json(self):
         this={
+            'id':self.pk,
             'news_url':self.news_url,
             'news_name':self.news_name,
         }
@@ -130,6 +133,7 @@ class Banner(models.Model):
 
     def to_json(self):
         this={
+            'id':self.pk,
             'cover':self.get_cover_url(),
             'detail_url':self.detail_url,
             'recommend_id':self.recommend_id,
@@ -209,9 +213,45 @@ class UserLike(models.Model):
 ################### building end ##################
 
 
-################### building end ##################
+################### 活动 ##################
+
+class CollectItem(models.Model):
+    class Meta:
+        verbose_name = '用户填写字段'
+        verbose_name_plural = '用户填写字段'
+    name=models.CharField(max_length=10,verbose_name='字段名称')
+
+    def __str__(self):
+        return self.name
 
 
+class Activity(models.Model):
+    class Meta:
+        verbose_name='活动列表'
+        verbose_name_plural='活动列表'
+    recommend_id=models.CharField(max_length=10,verbose_name='推荐指数',choices=RECOMMADN_IDS)
+    title=models.CharField(max_length=30,verbose_name='标题')
+    cover = models.ImageField(upload_to=pic_upload_path, verbose_name='封面图')
+    detail_url=models.CharField(max_length=100,verbose_name='详情链接')
+    limit_num=models.IntegerField(verbose_name='人数上限')
+    collect_item=models.ManyToManyField(CollectItem,verbose_name='请选择您想收集的用户信息')
 
+    def __str__(self):
+        return self.title
+
+    def get_cover_url(self):
+        return self.cover.url if self.cover else ''
+
+    def to_json(self):
+        this={
+            'id':self.pk,
+            'title':self.title,
+            'detail_url':self.detail_url,
+            'cover':self.get_cover_url(),
+        }
+        return this
+
+
+################### ／活动 ##################
 
 
