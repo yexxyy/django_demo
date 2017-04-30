@@ -9,6 +9,10 @@ from django.db import models
 # Create your models here.
 from django.utils.encoding import python_2_unicode_compatible
 from django.contrib.auth.models import User, Group
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 
 
 #图片上传路径
@@ -49,6 +53,9 @@ HOUSE_TYPE=(
 RECOMMADN_IDS=(
     ('1','一颗星'),('2','两颗星'),('3','三颗星'),('4','四颗星'),('5','五颗星')
 )
+
+
+
 
 ###################个人中心start##################
 
@@ -215,14 +222,27 @@ class UserLike(models.Model):
 
 ################### 活动 ##################
 
+COLLECT_ITEMS=(
+    ('手机','手机'),('真实姓名','真实姓名'),('年龄','年龄'),('联系地址','联系地址'),
+)
+
 class CollectItem(models.Model):
     class Meta:
         verbose_name = '用户填写字段'
         verbose_name_plural = '用户填写字段'
-    name=models.CharField(max_length=10,verbose_name='字段名称')
+    name=models.CharField(max_length=10,verbose_name='字段名称',choices=COLLECT_ITEMS,blank=True)
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        collect_items=CollectItem.objects.all()
+        is_added=False
+        for item in collect_items:
+            if item.name==self.name:
+                is_added=True
+        if is_added==False:
+            super(CollectItem, self).save(*args, **kwargs)
 
 
 class Activity(models.Model):
@@ -250,6 +270,12 @@ class Activity(models.Model):
             'cover':self.get_cover_url(),
         }
         return this
+
+
+
+
+
+
 
 
 ################### ／活动 ##################
