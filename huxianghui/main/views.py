@@ -262,6 +262,8 @@ def get_buildings_condition(request):
     })
 
 
+#活动
+
 @require_GET
 def get_activitys(requset):
     try:
@@ -333,6 +335,26 @@ def save_paticipator_info(request):
 
 
 
+#收藏
+@require_POST
+@csrf_exempt
+def set_liked(request,building_id):
+    user=request.user
+    try:
+        temp_id=int(building_id)
+        building = Building.objects.get(pk=temp_id)
+    except:
+        return HttpResponse('参数错误')
+    is_liked=False
+    for like_building in user.profile.likes.all():
+        if like_building.pk==temp_id:
+            is_liked=True
+    if is_liked:
+        user.profile.likes.remove(building)
+        return HttpResponse('取消收藏')
+    else:
+        user.profile.likes.add(building)
+        return HttpResponse('收藏成功')
 
 
 

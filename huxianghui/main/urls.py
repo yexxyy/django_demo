@@ -24,4 +24,6 @@ urlpatterns=[
     url(r'^get_collect_items/(?P<activity_id>\d+)/$',views.get_collect_items),
     url(r'^post_participator_info/$',views.save_paticipator_info),
 
+    url(r'^set_liked/(?P<building_id>\d+)/$',views.set_liked),
+
 ]
