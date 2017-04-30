@@ -23,12 +23,13 @@ GENDER_CHOICES = (
     ('F', '女'),
 )
 LOCATIONS=(
-    ('qingyang','青羊'),('jinniu','金牛'),('wuhou','武侯'),('chenghua','成华'),('gaoxing','高新区'),('gaoxingxiqu','高新西区'),
-    ('wenjaing','温江'),('shuangliu','双流'), ('longqianyi','龙泉驿'),('xindu','新都'),('pixian','郫县'),('dujiangyan','都江堰'),('qingbaijiang','青白江'),
-    ('pengzhou','彭州'),('pujiang','浦江'),('dayi','大邑'),('xinjin','新津'),('zongzhou','崇州'),('qonglai','邛崃'),('jintang','金堂')
+    ('jinjiang', '锦江'),('qingyangqu','青羊'),('jinniu','金牛'),('wuhou','武侯'),('chenghua','成华'),
+    ('gaoxing','高新区'),('gaoxingxiqu','高新西区'),('wenjaing','温江'),('shuangliu','双流'), ('longquanyi','龙泉驿'),
+    ('xindu','新都'),('pixian','郫县'),('dujiangyan','都江堰'),('qingbaijiang','青白江'),('pengzhou','彭州'),
+    ('pujiang','浦江'),('dayi','大邑'),('xinjin','新津'),('congzhou','崇州'),('qionglai','邛崃'),('jintang','金堂')
 )
 METRO=(
-    ('one','1号线'),('two','2号线'),('three','3号线'),('four','4号线'),('five','5号线'),('seven','7号线'),('chengguan','成灌快速铁路'),
+    ('one','1号线'),('two','2号线'),('three','3号线'),('four','4号线'),('five','5号线'),('seven','7号线'),('eight','成灌快速铁路'),
 )
 
 PRICE_SECTIONS=(
