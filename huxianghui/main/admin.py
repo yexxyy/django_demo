@@ -15,6 +15,7 @@ admin.site.unregister(User)
 admin.site.register(News)
 admin.site.register(Banner)
 admin.site.register(Building)
+admin.site.register(HouseType)
 admin.site.register(UserLike)
 
 
