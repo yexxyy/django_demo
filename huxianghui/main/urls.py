@@ -14,4 +14,5 @@ urlpatterns=[
     url(r'reset_passwd/$',views.reset_passwd),
     url(r'change_passwd/$',views.change_passwd),
 
+    url(r'^bulidings/(?P<page>\d+)/$', views.get_buildings),
 ]

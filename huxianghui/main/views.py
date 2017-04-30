@@ -168,3 +168,43 @@ def change_passwd(request):
         return HttpResponseBadRequest('参数不正确')
 
 
+
+#楼盘展示
+@require_GET
+def get_buildings(request,page):
+    PER_PAGE_NUMBERS=10
+    try:
+        page_index=int(page)
+    except:
+        return HttpResponseBadRequest('参数不正确')
+    buildings=Building.objects.all().order_by('pk')[PER_PAGE_NUMBERS*(page_index-1):PER_PAGE_NUMBERS*(page_index)]
+    json_list=[]
+    for building in buildings:
+        json_list.append(building.to_json())
+    if len(json_list)==0:
+        message='暂无更多数据'
+    else:
+        message='获取列表成功'
+    return JsonResponse({
+        'list':json_list,
+        'message':message,
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

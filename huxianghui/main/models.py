@@ -155,6 +155,21 @@ class Building(models.Model):
     def __str__(self):
         return self.title
 
+    def get_cover_url(self):
+        return self.cover.url if self.cover else ''
+
+    def to_json(self):
+        this = {
+            'id': self.pk,
+            'title': self.title,
+            'cover': self.get_cover_url(),
+            'location': self.location,
+            'detail_url': self.detail_url,
+            'price': self.price,
+            'recommend_id': self.recommend_id,
+        }
+        return this
+
 
 @python_2_unicode_compatible
 class UserLike(models.Model):
