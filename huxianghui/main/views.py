@@ -38,7 +38,7 @@ def signup(request):
         return HttpResponseBadRequest('邮箱为空')
     try:
         user=User.objects.create_user(username=phone,password=password,email=email)
-        profile=Profile(user=user,phone=phone,email=email)
+        profile=Profile(user=user)
         profile.save()
         print 'success!'
     except:
@@ -84,7 +84,7 @@ def forget_passwd(request):
         return HttpResponseBadRequest('邮箱不正确')
     if user is not None:
         try:
-            subject = '重置登录密码-狐享会'
+            subject = '狐享会-重置登录密码'
             link="{}/main/passwd_page/?code={}".format(settings.SERVER_HOST,base64.b64encode(user.username))
             html_message = '<b>重置链接：</b><a href="%s">%s</a>' % (link,link)
 

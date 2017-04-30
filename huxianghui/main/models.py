@@ -72,16 +72,12 @@ class Profile(models.Model):
     class Meta:
         verbose_name='用户中心'
         verbose_name_plural = '用户中心'
-
-
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     name=models.CharField(max_length=20,verbose_name='姓名',null=True,blank=True,default='')
-    phone=models.CharField(max_length=11,verbose_name='手机',null=False,)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, verbose_name='性别', blank=True,null=True)
     address = models.CharField(max_length=50, verbose_name='住址',blank=True,default='')
     regions=models.CharField(max_length=10,choices=LOCATIONS,verbose_name='意向区域',blank=True)
     styles=models.CharField(max_length=10,choices=BUILDING_TYPE,verbose_name='意向类型',blank=True)
-    email = models.CharField(max_length=30, verbose_name='邮箱',null=False)
 
     def __str__(self):
         return self.phone

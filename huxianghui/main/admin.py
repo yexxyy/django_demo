@@ -21,7 +21,7 @@ admin.site.register(UserLike)
 class ProfileForm(forms.ModelForm):
 	class Meta:
 		model = Profile
-		fields = ['name', 'phone', 'email', 'gender', 'address', 'regions','styles',]
+		fields = ['name','gender', 'address', 'regions','styles',]
 
 class ProfileInline(admin.StackedInline):
 	model = Profile
