@@ -190,6 +190,13 @@ def get_buildings(request,page):
         'message':message,
     })
 
+
+def get_condition(condition,param):
+    if len(param)!=0:
+        condition=param
+    else:
+        pass
+
 @require_POST
 @csrf_exempt
 def get_buildings_condition(request):
@@ -197,10 +204,27 @@ def get_buildings_condition(request):
     location = params.get('location')
     area_section= params.get('area_section')
     price_section= params.get('price_section')
-    buildings=Building.objects.filter(location=location,area_section=area_section,price_section=price_section)
+
+    if location and area_section and price_section:
+        buildings = Building.objects.filter(location=location,area_section=area_section,price_section=price_section)
+    elif location and area_section:
+        buildings = Building.objects.filter(location=location, area_section=area_section)
+    elif location and price_section:
+        buildings = Building.objects.filter(location=location, price_section=price_section)
+    elif area_section and price_section:
+        buildings = Building.objects.filter(area_section=area_section, price_section=price_section)
+    elif location:
+        buildings = Building.objects.filter(location=location)
+    elif area_section:
+        buildings = Building.objects.filter(area_section=area_section)
+    elif price_section:
+        buildings = Building.objects.filter(price_section=price_section)
+    else:
+        buildings = Building.objects.all()
+
     json_list=[]
     for building in buildings:
-        json_list.append(building.to_json)
+        json_list.append(building.to_json())
 
     if len(json_list) == 0:
         message = '此条件下无相关楼盘信息'
