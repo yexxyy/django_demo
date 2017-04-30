@@ -95,8 +95,8 @@ class Profile(models.Model):
 @python_2_unicode_compatible
 class News(models.Model):
     class Meta:
-        verbose_name='新闻'
-        verbose_name_plural='新闻'
+        verbose_name='新闻链接'
+        verbose_name_plural='新闻链接'
 
     news_url=models.CharField(max_length=200,verbose_name='链接',default='')
     news_name=models.CharField(max_length=20,verbose_name='名称',default='')
@@ -104,8 +104,12 @@ class News(models.Model):
     def __str__(self):
         return self.news_name
 
-    def get_imgurl(self):
-        return self.news_img.url if self.news_img else ''
+    def to_json(self):
+        this={
+            'news_url':self.news_url,
+            'news_name':self.news_name,
+        }
+        return this
 
 
 @python_2_unicode_compatible
@@ -113,10 +117,23 @@ class Banner(models.Model):
     class Meta:
         verbose_name = '顶部广告'
         verbose_name_plural = '顶部广告'
-    news_link=models.ForeignKey(News,on_delete=models.CASCADE)
+
+    cover = models.ImageField(upload_to=pic_upload_path, verbose_name='封面图',default='')
+    detail_url = models.CharField(max_length=100, verbose_name='详情链接',default='')
+    recommend_id = models.CharField(max_length=10, verbose_name='推荐指数', choices=RECOMMADN_IDS,blank=True)
+
+    def get_cover_url(self):
+        return self.cover.url if self.cover else ''
 
     def __str__(self):
-        return self.news_link.news_name
+        return self.get_cover_url()
+
+    def to_json(self):
+        this={
+            'cover':self.get_cover_url(),
+            'detail_url':self.detail_url,
+            'recommend_id':self.recommend_id,
+        }
 
 ################### Index end ##################
 
@@ -192,7 +209,7 @@ class UserLike(models.Model):
 ################### building end ##################
 
 
-
+################### building end ##################
 
 
 

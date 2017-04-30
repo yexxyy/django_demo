@@ -22,9 +22,14 @@ URL: http://0.0.0.0:8101/main/ + ...
 
 ---
 
+## *Banner and News*
+
+获取Banners：get_banners／（get）
+获取News：get_news／（get）
+
 ## *楼盘展示*
 
-获取楼盘列表：bulidings/1/ (get)
+分页获取楼盘列表：bulidings/1/ (get)
 
 条件筛选楼盘：buildings_condition／（post）(三个参数都不传返回所有数据)
 >location : LOCATIONS=(

@@ -168,6 +168,37 @@ def change_passwd(request):
         return HttpResponseBadRequest('参数不正确')
 
 
+#Baner and News
+@require_GET
+def get_banners(request):
+    try:
+        banners=Banner.objects.all().order_by('recommend_id')
+        json_list=[]
+        for banner in banners:
+            json_list.append(banner.to_json())
+        return JsonResponse({
+            'list':json_list,
+            'message':'获取banner成功',
+        })
+    except:
+        return HttpResponse('获取banner失败')
+
+@require_GET
+def get_news(request):
+    try:
+        news = News.objects.all()
+        json_list = []
+        for new in news:
+            json_list.append(new.to_json())
+        return JsonResponse({
+            'list': json_list,
+            'message': '获取新闻成功',
+        })
+    except:
+        return HttpResponse('获取新闻失败')
+
+
+
 
 #楼盘展示
 @require_GET
