@@ -25,5 +25,6 @@ urlpatterns=[
     url(r'^post_participator_info/$',views.save_paticipator_info),
 
     url(r'^set_liked/(?P<building_id>\d+)/$',views.set_liked),
+    url(r'^get_user_likes/$',views.get_user_likes),
 
 ]

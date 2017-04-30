@@ -281,6 +281,7 @@ def get_activitys(requset):
 
 @csrf_exempt
 @require_GET
+@login_required
 def get_collect_items(request,activity_id):
     user=request.user
     try:
@@ -304,6 +305,7 @@ def get_collect_items(request,activity_id):
 
 @require_POST
 @csrf_exempt
+@login_required
 def save_paticipator_info(request):
     params=request.POST
     user=request.user
@@ -336,8 +338,10 @@ def save_paticipator_info(request):
 
 
 #收藏
+
 @require_POST
 @csrf_exempt
+@login_required
 def set_liked(request,building_id):
     user=request.user
     try:
@@ -357,6 +361,19 @@ def set_liked(request,building_id):
         return HttpResponse('收藏成功')
 
 
+@require_GET
+@csrf_exempt
+@login_required
+def get_user_likes(request):
+    user=request.user
+    likes=user.profile.likes.all()
+    json_list=[]
+    for like in likes:
+        json_list.append(like.to_json())
+    return JsonResponse({
+        'message':'获取收藏成功',
+        'list':json_list,
+    })
 
 
 

@@ -20,6 +20,11 @@ URL: http://0.0.0.0:8101/main/ + ...
 #### 修改密码：change_passwd/（login_required / post）
 >old_passwd  password0(>=6)  password1
 
+#### 收藏楼盘：set_liked/2/（login_required/post）
+>再请求则取消收藏
+
+#### 获取用户收藏：get_user_likes/ （login_required／get）
+
 ---
 
 ## *Banner and News*
@@ -47,15 +52,12 @@ URL: http://0.0.0.0:8101/main/ + ...
     ('one','3000以下'), ('two','3000-5000'), ('three','5000-7000'), ('four','7000-9000'), ('five','9000-11000'), ('size','11000-15000'), ('seven','15000-20000'),('eight','20000以上'),
 )
 
-#### 收藏楼盘：set_liked/2/（post）
->再请求则取消收藏
-
 
 ## *活动*
 
 #### 获取活动列表：get_activitys（get）
 
-#### 获取活动收集的用户字段：get_collect_items/1/ （get）
+#### 获取活动收集的用户字段：get_collect_items/1/ （login_required/get）
 
 结果样例：
 
@@ -77,7 +79,7 @@ URL: http://0.0.0.0:8101/main/ + ...
 }
 ```
 
-#### 活动报名：post_participator_info/（post）
+#### 活动报名：post_participator_info/（login_required/post）
 
 >name phone age address (全部选填)
 
