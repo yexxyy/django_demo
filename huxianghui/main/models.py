@@ -255,6 +255,22 @@ class CollectItem(models.Model):
         return this
 
 
+
+class ParticipatorInfo(models.Model):
+    class Meta:
+        verbose_name='参加者信息'
+        verbose_name_plural='参加者信息'
+    name=models.CharField(max_length=11,verbose_name='姓名',blank=True,null=True)
+    phone=models.CharField(max_length=11,verbose_name='手机号码',blank=True,null=True)
+    age=models.IntegerField(verbose_name='年龄',blank=True,null=True)
+    address=models.CharField(max_length=11,verbose_name='联系地址',blank=True,null=True)
+    user=models.ForeignKey(User,related_name='user_info',verbose_name='关联用户')
+
+    def __str__(self):
+        return self.name
+
+
+
 class Activity(models.Model):
     class Meta:
         verbose_name='活动列表'
@@ -265,6 +281,7 @@ class Activity(models.Model):
     detail_url=models.CharField(max_length=100,verbose_name='详情链接')
     limit_num=models.IntegerField(verbose_name='人数上限')
     collect_item=models.ManyToManyField(CollectItem,verbose_name='请选择您想收集的用户信息')
+    participator=models.ManyToManyField(ParticipatorInfo,verbose_name='已报名用户')
 
     def __str__(self):
         return self.title
@@ -280,6 +297,7 @@ class Activity(models.Model):
             'cover':self.get_cover_url(),
         }
         return this
+
 
 
 

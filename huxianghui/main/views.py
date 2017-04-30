@@ -300,6 +300,8 @@ def get_collect_items(request,activity_id):
         return HttpResponseBadRequest('参数错误')
 
 
+# @require_POST
+# @csrf_exempt
 
 
 
