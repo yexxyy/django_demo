@@ -474,7 +474,7 @@ def set_liked(request,building_id):
         return HttpResponse('收藏成功')
 
 
-@require_GET
+@require_POST
 @csrf_exempt
 # @login_required
 def get_user_likes(request):
