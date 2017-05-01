@@ -119,6 +119,21 @@ BUILDING_TYPE=(
 
 ## *活动*
 
+#### 获取活动广告 ：activity_banner／（get）
+结果样例：
+```
+{
+  "message": "获取活动广告成功",
+  "list": [
+    {
+      "activity_id": 1,
+      "cover": "/assets/main/1f0f97df2d80451ea5fe61b67c990fc2.jpg",
+      "title": "我是活动表我"
+    }
+  ]
+}
+```
+
 #### 分页获取活动列表：get_activitys/1/（get ）
 
 #### 获取活动收集的用户字段：get_collect_items/1/ （login_required/get）
