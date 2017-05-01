@@ -125,25 +125,30 @@ def passwd_page(request):
 def reset_passwd(request):
     params=request.POST
     user = request.user
-    base_string='尊敬的狐享会用户：'
+    base_string=''
+    is_success=False
     try:
         password1=params['password1']
         password0=params['password0']
         if len(password0) < 6:
-            message = '{}{}'.format(base_string, '密码长度太短')
+            message = '{}{}'.format(base_string, '密码长度太短,至少大于6位')
         elif password0 != password1:
             message = '{}{}'.format(base_string, '两次输入的密码不一致')
         else:
             try:
                 user.set_password(password0)
                 user.save()
-                message = '{}{}'.format(base_string, '密码重置成功')
+                is_success=True
+                message = '{}{}'.format(base_string, '尊敬的狐享会用户，您的密码重置成功！')
             except:
                 message = '{}{}'.format(base_string, '密码重置失败')
     except:
         message='{}{}'.format(base_string,'参数错误，请重新提交')
 
-    return render(request,'reset_result.html',{'message':message})
+    if is_success:
+        return render(request, 'reset_result.html', {'message': message})
+    else:
+        return render(request, 'reset_passwd.html', {'message': message})
 
 
 @csrf_exempt

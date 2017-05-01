@@ -24,7 +24,7 @@ $(function () {
 				}
 				let json = xhr.responseJSON
 
-				for (let i of ['email', 'phone', 'name', 'grade', 'campus']) {
+				for (let i of ['password0', 'password1']) {
 					if (json[i]) {
 						$('[name={0}]'.format(i)).toggleClass('error')
 					}
