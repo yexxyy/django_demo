@@ -450,13 +450,13 @@ def save_paticipator_info(request):
 @require_POST
 @csrf_exempt
 def set_liked(request,building_id):
+    user_id=request.POST.get('user_id')
     try:
-        user_id=request.POST['user_id']
-        user=User.objects.get(user_id)
+        user=User.objects.get(username=user_id)
         temp_id=int(building_id)
         building = Building.objects.get(pk=temp_id)
-    except:
-        return HttpResponse('参数错误')
+    except Exception ,e:
+        return HttpResponseBadRequest(e)
     is_liked=False
     for like_building in user.profile.likes.all():
         if like_building.pk==temp_id:
