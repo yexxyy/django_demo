@@ -379,6 +379,23 @@ def get_buildings_condition(request,page):
 
 
 #活动
+@require_GET
+def get_activity_banner(request):
+    banners=ActivityBanner.objects.all()
+    json_list=[]
+    for banner in banners:
+        json_list.append(banner.to_json())
+
+    if len(json_list) == 0:
+        message = '暂时未添加活动广告'
+    else:
+        message = '获取活动广告成功'
+    return JsonResponse({
+        'list': json_list,
+        'message': message,
+    })
+
+
 
 @require_GET
 def get_activitys(requset,page):

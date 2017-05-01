@@ -15,6 +15,8 @@ admin.site.register(HouseType)
 admin.site.register(Building)
 admin.site.register(Activity)
 admin.site.register(CollectItem)
+admin.site.register(ActivityBanner)
+
 
 class ProfileForm(forms.ModelForm):
 	class Meta:

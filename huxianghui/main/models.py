@@ -272,6 +272,33 @@ class Activity(models.Model):
         return this
 
 
+@python_2_unicode_compatible
+class ActivityBanner(models.Model):
+    class Meta:
+        verbose_name='活动广告'
+        verbose_name_plural='活动广告'
+    cover= models.ImageField(verbose_name='封面图',upload_to=pic_upload_path,blank=True,default="")
+    activity= models.ForeignKey(Activity,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.activity.title
+
+    def to_json(self):
+        if self.cover:
+            image_url = self.cover.url
+        elif self.activity.cover:
+            image_url = self.activity.cover.url
+        else:
+            image_url = ""
+        this={
+            "cover":image_url,
+            "activity_id": self.activity.pk,
+            "title":self.activity.title,
+        }
+        return this
+
+
+
 ################### ／活动 ##################
 
 
