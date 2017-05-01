@@ -313,7 +313,11 @@ def get_buildings(request,page):
 
 @require_POST
 @csrf_exempt
-def get_buildings_condition(request):
+def get_buildings_condition(request,page):
+    try:
+        page_index = int(page)
+    except:
+        return HttpResponseBadRequest('参数不正确')
     params=request.POST
     location = params.get('location')
     area_section= params.get('area_section')
@@ -336,6 +340,7 @@ def get_buildings_condition(request):
     else:
         buildings = Building.objects.all()
 
+    buildings=buildings[PER_PAGE_NUMBERS*(page_index-1):PER_PAGE_NUMBERS*(page_index)]
     json_list=[]
     for building in buildings:
         json_list.append(building.to_json())

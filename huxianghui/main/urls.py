@@ -20,7 +20,7 @@ urlpatterns=[
     url(r'^get_news/$',views.get_news),
 
     url(r'^bulidings/(?P<page>\d+)/$', views.get_buildings),
-    url(r'^buildings_condition/$',views.get_buildings_condition),
+    url(r'^buildings_condition/(?P<page>\d+)/$',views.get_buildings_condition),
     url(r'^search_building\/?$',views.search_building),
 
     url(r'^get_activitys/(?P<page>\d+)/$',views.get_activitys),
