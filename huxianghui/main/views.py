@@ -279,7 +279,7 @@ def get_buildings(request,page):
         page_index=int(page)
     except:
         return HttpResponseBadRequest('参数不正确')
-    buildings=Building.objects.all().order_by('-recommend_id')[PER_PAGE_NUMBERS*(page_index-1):PER_PAGE_NUMBERS*(page_index)]
+    buildings=Building.objects.all().order_by('recommend_id')[PER_PAGE_NUMBERS*(page_index-1):PER_PAGE_NUMBERS*(page_index)]
     json_list=[]
     if request.user.is_authenticated():
         likes = request.user.profile.likes.all()
@@ -377,7 +377,7 @@ def get_activitys(requset,page):
         return HttpResponseBadRequest('参数不正确')
 
     try:
-        activitys = Activity.objects.all().order_by('-recommend_id')[PER_PAGE_NUMBERS * (page_index - 1):PER_PAGE_NUMBERS * (page_index)]
+        activitys = Activity.objects.all().order_by('recommend_id')[PER_PAGE_NUMBERS * (page_index - 1):PER_PAGE_NUMBERS * (page_index)]
         json_list = []
         for activity in activitys:
             json_list.append(activity.to_json())
@@ -494,7 +494,7 @@ def search_building(request):
     if query is None:
         return HttpResponseBadRequest("参数错误")
     user=request.user
-    buildings=Building.objects.filter(title__contains=query).order_by('-recommend_id')
+    buildings=Building.objects.filter(title__contains=query).order_by('recommend_id')
 
     json_list = []
     if user is None:
