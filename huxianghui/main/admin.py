@@ -19,7 +19,7 @@ admin.site.register(CollectItem)
 class ProfileForm(forms.ModelForm):
 	class Meta:
 		model = Profile
-		fields = ['name','gender', 'age', 'address', 'regions','styles',]
+		fields = ['name','gender','weichat', 'address', 'regions','styles',]
 
 class ProfileInline(admin.StackedInline):
 	model = Profile

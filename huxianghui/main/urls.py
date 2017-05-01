@@ -14,6 +14,7 @@ urlpatterns=[
     url(r'^reset_passwd/$',views.reset_passwd),
     url(r'^change_passwd/$',views.change_passwd),
     url(r'^user_info/$',views.get_user_info),
+    url(r'^set_user_info/$',views.set_user_info),
 
     url(r'^get_banners/$',views.get_banners),
     url(r'^get_news/$',views.get_news),

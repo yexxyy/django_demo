@@ -170,6 +170,35 @@ def change_passwd(request):
 
 
 @csrf_exempt
+@require_POST
+@login_required
+def set_user_info(request):
+    user=request.user
+    params=request.POST
+    print params
+    try:
+        name = params['name']
+        address = params['address']
+        gender = params['gender']
+        styles = params['styles']
+        regions = params['regions']
+        weichat = params['weichat']
+        user.profile.name=name
+        user.profile.address=address
+        user.profile.gender=gender
+        user.profile.styles=styles
+        user.profile.regions=regions
+        user.profile.weichat=weichat
+        user.profile.save()
+        return HttpResponse('提交信息成功')
+    except Exception,e :
+        print e
+        return HttpResponseBadRequest('参数不正确')
+
+
+
+
+@csrf_exempt
 @require_GET
 @login_required
 def get_user_info(request):
@@ -180,7 +209,7 @@ def get_user_info(request):
         'email':user.email,
         'gender':user.profile.gender,
         'address':user.profile.address,
-        'age':user.profile.age,
+        'weichat':user.profile.weichat,
         'regions':user.profile.regions,
         'styles':user.profile.styles,
     }

@@ -27,7 +27,7 @@ GENDER_CHOICES = (
     ('男', '女'),
 )
 LOCATIONS=(
-    ('锦江', '锦江'),('青羊','青羊'),('金牛','金牛'),('武侯','武侯'),('成华','成华'),
+    ('锦江区', '锦江区'),('青羊区','青羊区'),('金牛区','金牛区'),('武侯区','武侯区'),('成华区','成华区'),
     ('高新区','高新区'),('高新西区','高新西区'),('温江','温江'),('双流','双流'), ('龙泉驿','龙泉驿'),
     ('新都','新都'),('郫县','郫县'),('都江堰','都江堰'),('青白江','青白江'),('彭州','彭州'),
     ('浦江','浦江'),('大邑','大邑'),('新津','新津'),('崇州','崇州'),('邛崃','邛崃'),('金堂','金堂')
@@ -86,11 +86,11 @@ class Building(models.Model):
     title=models.CharField(max_length=50,verbose_name='标题')
     cover=models.ImageField(upload_to=pic_upload_path,verbose_name='封面图')
     location=models.CharField(max_length=70,verbose_name='位置',choices=LOCATIONS,blank=True)
-    metro=models.CharField(max_length=10,verbose_name='周边地铁',choices=METRO,blank=True)
-    price_section=models.CharField(max_length=10,verbose_name='价格区间',choices=PRICE_SECTIONS,blank=True)
+    metro=models.CharField(max_length=20,verbose_name='周边地铁',choices=METRO,blank=True)
+    price_section=models.CharField(max_length=20,verbose_name='价格区间',choices=PRICE_SECTIONS,blank=True)
     house_type=models.ManyToManyField(HouseType,verbose_name='户型')
-    building_type=models.CharField(max_length=10,verbose_name='楼盘类型',choices=BUILDING_TYPE,blank=True)
-    area_section=models.CharField(max_length=15,verbose_name='面积区间',choices=AREA_SECCTIONS,blank=True)
+    building_type=models.CharField(max_length=20,verbose_name='楼盘类型',choices=BUILDING_TYPE,blank=True)
+    area_section=models.CharField(max_length=20,verbose_name='面积区间',choices=AREA_SECCTIONS,blank=True)
     open_date=models.DateField(verbose_name='开盘时间')
     detail_url=models.CharField(max_length=100,verbose_name='详情链接')
     phone=models.CharField(max_length=11,verbose_name='联系电话')
@@ -129,7 +129,7 @@ class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     name=models.CharField(max_length=20,verbose_name='姓名',null=True,blank=True,default='')
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, verbose_name='性别', blank=True,null=True)
-    age=models.IntegerField(verbose_name='年龄',blank=True,null=True)
+    weichat=models.CharField(verbose_name='微信号',max_length=20,blank=True,null=True)
     address = models.CharField(max_length=50, verbose_name='住址',blank=True,default='')
     regions=models.CharField(max_length=10,choices=LOCATIONS,verbose_name='意向区域',blank=True)
     styles=models.CharField(max_length=10,choices=BUILDING_TYPE,verbose_name='意向类型',blank=True)
