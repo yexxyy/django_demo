@@ -23,7 +23,23 @@ URL: http://0.0.0.0:8101/main/ + ...
 
 #### 获取用户收藏：get_user_likes/ （login_required／get）
 
+#### 获取用户信息：user_info/ (login_required / get)
+结果样例：
+```
+{
+  "user_info": {
+    "styles": "",//意向类型（普通住宅，别墅...）
+    "name": "",
+    "gender": null,
+    "age": null,
+    "regions": "",//意向区域
+    "phone": "18280082093",
+    "address": ""
+  },
+  "message": "获取用户信息成功"
+}
 
+```
 
 
 ## *Banner and News*

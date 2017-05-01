@@ -14,7 +14,6 @@ from models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 import base64
-import traceback
 
 
 #个人中心
@@ -168,6 +167,31 @@ def change_passwd(request):
 
     except:
         return HttpResponseBadRequest('参数不正确')
+
+
+@csrf_exempt
+@require_GET
+@login_required
+def get_user_info(request):
+    user=request.user
+    info_josn={
+        'phone':user.username,
+        'name':user.profile.name,
+        'email':user.email,
+        'gender':user.profile.gender,
+        'address':user.profile.address,
+        'age':user.profile.age,
+        'regions':user.profile.regions,
+        'styles':user.profile.styles,
+    }
+    return JsonResponse({
+        'message':'获取用户信息成功',
+        'user_info':info_josn,
+    })
+
+
+
+
 
 
 #Baner and News
