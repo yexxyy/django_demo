@@ -186,18 +186,17 @@ def change_passwd(request):
 
 @csrf_exempt
 @require_POST
-@login_required
 def set_user_info(request):
-    user=request.user
     params=request.POST
-    print params
     try:
+        user_id=params['user_id']
         name = params['name']
         address = params['address']
         gender = params['gender']
         styles = params['styles']
         regions = params['regions']
         weichat = params['weichat']
+        user=User.objects.get(user_id)
         user.profile.name=name
         user.profile.address=address
         user.profile.gender=gender
@@ -450,10 +449,10 @@ def save_paticipator_info(request):
 
 @require_POST
 @csrf_exempt
-@login_required
 def set_liked(request,building_id):
-    user=request.user
     try:
+        user_id=request.POST['user_id']
+        user=User.objects.get(user_id)
         temp_id=int(building_id)
         building = Building.objects.get(pk=temp_id)
     except:
