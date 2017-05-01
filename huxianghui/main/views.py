@@ -89,7 +89,7 @@ def forget_passwd(request):
     if user is not None:
         try:
             subject = '狐享会-重置登录密码'
-            link="{}/main/passwd_page/?code={}".format(settings.SERVER_HOST,base64.b64encode(user.username))
+            link="{}main/passwd_page/?code={}".format(settings.SERVER_HOST,base64.b64encode(user.username))
             html_message = '<b>重置链接：</b><a href="%s">%s</a>' % (link,link)
 
             send_mail(

@@ -15,7 +15,7 @@ CORS_ORIGIN_ALLOW_ALL=True
 AUTH_PROFILE_MODULE = 'main.Profile'
 
 # SERVER_HOST='http://0.0.0.0:8101'
-SERVER_HOST='http://119.23.27.133:8102'
+SERVER_HOST='https://www.sohuhxh.com/'
 
 
 #SEND MAIL SETTINGS
