@@ -134,6 +134,7 @@ class Profile(models.Model):
     regions=models.CharField(max_length=10,choices=LOCATIONS,verbose_name='意向区域',blank=True)
     styles=models.CharField(max_length=10,choices=BUILDING_TYPE,verbose_name='意向类型',blank=True)
     likes=models.ManyToManyField(Building,verbose_name='收藏的楼盘')
+    send_reset_password_email=models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username

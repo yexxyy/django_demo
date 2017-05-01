@@ -99,6 +99,8 @@ def forget_passwd(request):
                 recipient_list=[user.email,],  # to
                 html_message=html_message,
             )
+            user.profile.send_reset_password_email=True
+            user.profile.save()
             return HttpResponse('密码重置链接已发送至您的邮箱')
         except Exception as e:
             logger.error(e)
@@ -112,9 +114,14 @@ def passwd_page(request):
     decode_str=base64.b64decode(code)
     user = User.objects.get(username=decode_str)
     if user is not None:
-        user.backend = 'django.contrib.auth.backends.ModelBackend'
-        login(request, user)
-        return render(request, 'reset_passwd.html')
+        if user.profile.send_reset_password_email:
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
+            login(request, user)
+            user.profile.send_reset_password_email=False
+            return render(request, 'reset_passwd.html')
+        else:
+            return render(request, 'reset_result.html', {'message': '狐享会-重置密码链接已失效...'})
+
     return HttpResponse('出现了错误')
 
 
