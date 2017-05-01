@@ -259,7 +259,6 @@ def get_news(request):
 @require_GET
 @csrf_exempt
 def get_buildings(request,page):
-    user = request.user
     PER_PAGE_NUMBERS=10
     try:
         page_index=int(page)
@@ -267,11 +266,21 @@ def get_buildings(request,page):
         return HttpResponseBadRequest('参数不正确')
     buildings=Building.objects.all().order_by('-recommend_id')[PER_PAGE_NUMBERS*(page_index-1):PER_PAGE_NUMBERS*(page_index)]
     json_list=[]
-    if user is None:
+    if request.user.is_authenticated():
+        likes = request.user.profile.likes.all()
         for building in buildings:
-            temp_json=building.to_json()
-            temp_json['is_like']=False
+            temp_json = building.to_json()
+            try:
+                like_building = likes.get(pk=building.pk)
+                if like_building is None:
+                    temp_json['is_like'] = False
+                else:
+                    temp_json['is_like'] = True
+
+            except:
+                temp_json['is_like'] = False
             json_list.append(temp_json)
+
         if len(json_list) == 0:
             message = '暂无更多楼盘信息'
         else:
@@ -280,22 +289,14 @@ def get_buildings(request,page):
             'list': json_list,
             'message': message,
         })
+
+
+
     else:
-        likes=user.profile.likes.all()
-
         for building in buildings:
-            temp_json=building.to_json()
-            try:
-                like_building=likes.get(pk=building.pk)
-                if like_building is None:
-                    temp_json['is_like']=False
-                else:
-                    temp_json['is_like'] = True
-
-            except:
-                temp_json['is_like'] = False
+            temp_json = building.to_json()
+            temp_json['is_like'] = False
             json_list.append(temp_json)
-
         if len(json_list) == 0:
             message = '暂无更多楼盘信息'
         else:
@@ -367,7 +368,6 @@ def get_activitys(requset):
 @require_GET
 @login_required
 def get_collect_items(request,activity_id):
-    user=request.user
     try:
         temp_id=int(activity_id)
         activity = Activity.objects.get(pk=temp_id)
