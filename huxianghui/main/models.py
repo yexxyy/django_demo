@@ -67,6 +67,15 @@ class HouseType(models.Model):
     def __str__(self):
         return self.house_type
 
+    def save(self, *args, **kwargs):
+        house_types = HouseType.objects.all()
+        is_added = False
+        for type in house_types:
+            if type.house_type == self.house_type:
+                is_added = True
+        if is_added == False:
+            super(HouseType, self).save(*args, **kwargs)
+
 
 @python_2_unicode_compatible
 class Building(models.Model):

@@ -13,7 +13,7 @@ from models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 import base64
-
+import traceback
 
 
 #个人中心
@@ -41,8 +41,9 @@ def signup(request):
         profile=Profile(user=user)
         profile.save()
         print 'success!'
-    except:
-        return HttpResponseBadRequest('注册失败')
+    except Exception,e :
+        print e
+        return HttpResponseBadRequest(e)
     return HttpResponse('注册成功')
 
 
@@ -208,7 +209,7 @@ def get_buildings(request,page):
         page_index=int(page)
     except:
         return HttpResponseBadRequest('参数不正确')
-    buildings=Building.objects.all().order_by('pk')[PER_PAGE_NUMBERS*(page_index-1):PER_PAGE_NUMBERS*(page_index)]
+    buildings=Building.objects.all().order_by('-recommend_id')[PER_PAGE_NUMBERS*(page_index-1):PER_PAGE_NUMBERS*(page_index)]
     json_list=[]
     for building in buildings:
         json_list.append(building.to_json())
