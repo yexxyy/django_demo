@@ -128,10 +128,11 @@ def passwd_page(request):
 
 @csrf_exempt
 @require_POST
-@login_required
+# @login_required
 def reset_passwd(request):
     params=request.POST
-    user = request.user
+    user_id = request.POST.get('user_id')
+    user = User.objects.get(username=user_id)
     base_string=''
     is_success=False
     try:
@@ -160,10 +161,11 @@ def reset_passwd(request):
 
 @csrf_exempt
 @require_POST
-@login_required
+# @login_required
 def change_passwd(request):
     params=request.POST
-    user=request.user
+    user_id = request.POST.get('user_id')
+    user = User.objects.get(username=user_id)
     try:
         old_passwd=params['old_passwd']
         password0=params['password0']
@@ -214,9 +216,10 @@ def set_user_info(request):
 
 @csrf_exempt
 @require_GET
-@login_required
+# @login_required
 def get_user_info(request):
-    user=request.user
+    user_id = request.POST.get('user_id')
+    user = User.objects.get(username=user_id)
     info_josn={
         'phone':user.username,
         'name':user.profile.name,
@@ -390,7 +393,7 @@ def get_activitys(requset,page):
 
 @csrf_exempt
 @require_GET
-@login_required
+# @login_required
 def get_collect_items(request,activity_id):
     try:
         temp_id=int(activity_id)
@@ -413,10 +416,11 @@ def get_collect_items(request,activity_id):
 
 @require_POST
 @csrf_exempt
-@login_required
+# @login_required
 def save_paticipator_info(request):
     params=request.POST
-    user=request.user
+    user_id = request.POST.get('user_id')
+    user = User.objects.get(username=user_id)
     activity_id = params.get('activity_id')
     name = params.get('name')
     phone = params.get('phone')
@@ -449,6 +453,7 @@ def save_paticipator_info(request):
 
 @require_POST
 @csrf_exempt
+# @login_required
 def set_liked(request,building_id):
     user_id=request.POST.get('user_id')
     try:
@@ -471,9 +476,10 @@ def set_liked(request,building_id):
 
 @require_GET
 @csrf_exempt
-@login_required
+# @login_required
 def get_user_likes(request):
-    user=request.user
+    user_id = request.POST.get('user_id')
+    user = User.objects.get(username=user_id)
     likes=user.profile.likes.all()
     json_list=[]
     for like in likes:
