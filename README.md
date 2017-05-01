@@ -28,13 +28,14 @@ URL: http://0.0.0.0:8101/main/ + ...
 ```
 {
   "user_info": {
-    "styles": "",//意向类型（普通住宅，别墅...）
-    "name": "",
-    "gender": null,
-    "age": null,
-    "regions": "",//意向区域
-    "phone": "18280082093",
-    "address": ""
+    "regions": "双流",
+    "phone": "18280080000",
+    "name": "叶同学",
+    "address": "农村",
+    "styles": "别墅",
+    "gender": "男",
+    "age": 2134,
+    "email": "example@qq.com"
   },
   "message": "获取用户信息成功"
 }
