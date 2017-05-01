@@ -42,7 +42,7 @@ URL: http://0.0.0.0:8101/main/ + ...
 结果样例：
 ```
 {
-  "message": "获取楼盘列表成功",
+  "message": "获取楼盘信息成功",
   "list": [
     {
       "phone": "18280082093",
@@ -52,7 +52,19 @@ URL: http://0.0.0.0:8101/main/ + ...
       "price": 23243,
       "detail_url": "links",
       "cover": "/assets/main/56b62f80201d462bada9054ec1117fa3.jpg",
-      "id": 2
+      "id": 2,
+      "is_like": true
+    },
+    {
+      "phone": "asdf",
+      "location": "gaoxingxiqu",
+      "title": "pdf",
+      "recommend_id": 2,
+      "price": 3,
+      "detail_url": "pdf",
+      "cover": "/assets/main/87381e9876934e12ad65531426186751.png",
+      "id": 1,
+      "is_like": false
     }
   ]
 }
