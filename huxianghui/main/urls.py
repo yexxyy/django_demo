@@ -23,7 +23,7 @@ urlpatterns=[
     url(r'^buildings_condition/$',views.get_buildings_condition),
     url(r'^search_building\/?$',views.search_building),
 
-    url(r'^get_activitys/$',views.get_activitys),
+    url(r'^get_activitys/(?P<page>\d+)/$',views.get_activitys),
     url(r'^get_collect_items/(?P<activity_id>\d+)/$',views.get_collect_items),
     url(r'^post_participator_info/$',views.save_paticipator_info),
 

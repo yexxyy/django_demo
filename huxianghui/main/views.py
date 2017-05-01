@@ -15,6 +15,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 import base64
 
+#分页每页获取信息条数
+PER_PAGE_NUMBERS=10
+
 
 #个人中心
 @require_POST
@@ -259,7 +262,7 @@ def get_news(request):
 @require_GET
 @csrf_exempt
 def get_buildings(request,page):
-    PER_PAGE_NUMBERS=10
+
     try:
         page_index=int(page)
     except:
@@ -350,9 +353,14 @@ def get_buildings_condition(request):
 #活动
 
 @require_GET
-def get_activitys(requset):
+def get_activitys(requset,page):
     try:
-        activitys = Activity.objects.all()
+        page_index = int(page)
+    except:
+        return HttpResponseBadRequest('参数不正确')
+
+    try:
+        activitys = Activity.objects.all().order_by('-recommend_id')[PER_PAGE_NUMBERS * (page_index - 1):PER_PAGE_NUMBERS * (page_index)]
         json_list = []
         for activity in activitys:
             json_list.append(activity.to_json())
