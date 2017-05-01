@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+from django.db.models import Q
 from django.shortcuts import render
 from huxianghui.settings import settings
 from django.views.decorators.csrf import csrf_exempt
@@ -406,6 +407,55 @@ def get_user_likes(request):
     })
 
 
+
+@require_GET
+@csrf_exempt
+def search_building(request):
+    # search /?q = keyword
+    query = request.GET.get('q')
+    if query is None:
+        return HttpResponseBadRequest("参数错误")
+    user=request.user
+    buildings=Building.objects.filter(title__contains=query).order_by('-recommend_id')
+
+    json_list = []
+    if user is None:
+        for building in buildings:
+            temp_json = building.to_json()
+            temp_json['is_like'] = False
+            json_list.append(temp_json)
+        if len(json_list) == 0:
+            message = '暂无更多楼盘信息'
+        else:
+            message = '获取楼盘信息成功'
+        return JsonResponse({
+            'list': json_list,
+            'message': message,
+        })
+    else:
+        likes = user.profile.likes.all()
+
+        for building in buildings:
+            temp_json = building.to_json()
+            try:
+                like_building = likes.get(pk=building.pk)
+                if like_building is None:
+                    temp_json['is_like'] = False
+                else:
+                    temp_json['is_like'] = True
+
+            except:
+                temp_json['is_like'] = False
+            json_list.append(temp_json)
+
+        if len(json_list) == 0:
+            message = '暂无更多楼盘信息'
+        else:
+            message = '获取楼盘信息成功'
+        return JsonResponse({
+            'list': json_list,
+            'message': message,
+        })
 
 
 

@@ -19,6 +19,7 @@ urlpatterns=[
 
     url(r'^bulidings/(?P<page>\d+)/$', views.get_buildings),
     url(r'^buildings_condition/$',views.get_buildings_condition),
+    url(r'^search_building\/?$',views.search_building),
 
     url(r'^get_activitys/$',views.get_activitys),
     url(r'^get_collect_items/(?P<activity_id>\d+)/$',views.get_collect_items),
