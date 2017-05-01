@@ -192,13 +192,14 @@ def set_user_info(request):
     params=request.POST
     try:
         user_id=params['user_id']
+        user = User.objects.get(username=user_id)
         name = params['name']
         address = params['address']
         gender = params['gender']
         styles = params['styles']
         regions = params['regions']
         weichat = params['weichat']
-        user=User.objects.get(user_id)
+
         user.profile.name=name
         user.profile.address=address
         user.profile.gender=gender
@@ -215,7 +216,7 @@ def set_user_info(request):
 
 
 @csrf_exempt
-@require_GET
+@require_POST
 # @login_required
 def get_user_info(request):
     user_id = request.POST.get('user_id')
@@ -273,7 +274,7 @@ def get_news(request):
 
 
 #楼盘展示
-@require_GET
+@require_POST
 @csrf_exempt
 def get_buildings(request,page):
 
@@ -281,10 +282,18 @@ def get_buildings(request,page):
         page_index=int(page)
     except:
         return HttpResponseBadRequest('参数不正确')
+    islogin=True
+    try:
+        user_id = request.POST.get('user_id')
+        user = User.objects.get(username=user_id)
+    except:
+        islogin=False
+
+
     buildings=Building.objects.all().order_by('recommend_id')[PER_PAGE_NUMBERS*(page_index-1):PER_PAGE_NUMBERS*(page_index)]
     json_list=[]
-    if request.user.is_authenticated():
-        likes = request.user.profile.likes.all()
+    if islogin: #request.user.is_authenticated()
+        likes = user.profile.likes.all()
         for building in buildings:
             temp_json = building.to_json()
             try:
@@ -455,8 +464,8 @@ def save_paticipator_info(request):
 @csrf_exempt
 # @login_required
 def set_liked(request,building_id):
-    user_id=request.POST.get('user_id')
     try:
+        user_id = request.POST.get('user_id')
         user=User.objects.get(username=user_id)
         temp_id=int(building_id)
         building = Building.objects.get(pk=temp_id)
@@ -491,14 +500,15 @@ def get_user_likes(request):
 
 
 
-@require_GET
+@require_POST
 @csrf_exempt
 def search_building(request):
     # search /?q = keyword
-    query = request.GET.get('q')
+    query = request.POST.get('q')
     if query is None:
         return HttpResponseBadRequest("参数错误")
-    user=request.user
+    user_id = request.POST.get('user_id')
+    user = User.objects.get(username=user_id)
     buildings=Building.objects.filter(title__contains=query).order_by('recommend_id')
 
     json_list = []
