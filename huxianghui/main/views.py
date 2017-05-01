@@ -415,6 +415,7 @@ def get_collect_items(request,activity_id):
             return JsonResponse({
                 'list':json_list,
                 'activity_id':temp_id,
+                'title':activity.title,
                 'message':'获取收集字段列表成功'
             })
         else:
