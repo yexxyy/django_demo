@@ -24,3 +24,4 @@ EMAIL_PORT='25'
 EMAIL_HOST_USER='email-help@foxmail.com'
 EMAIL_HOST_PASSWORD='afgmlyzhvysxcjjf'
 EMAIL_USE_TLS=True
+EMAIL_USE_SSL=True
