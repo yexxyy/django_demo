@@ -19,9 +19,9 @@ SERVER_HOST='https://www.sohuhxh.com/'
 
 
 #SEND MAIL SETTINGS
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST='smtp.qq.com'
-EMAIL_PORT='465'
+EMAIL_PORT='587'
 EMAIL_HOST_USER='email-help@foxmail.com'
 EMAIL_HOST_PASSWORD='afgmlyzhvysxcjjf'
-# EMAIL_USE_TLS=True
-EMAIL_USE_SSL=True
+EMAIL_USE_TLS=True
