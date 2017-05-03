@@ -84,8 +84,8 @@ def forget_passwd(request):
     try:
         email=params['email']
         user = User.objects.get(email=email)
-    except:
-        return HttpResponseBadRequest('邮箱不正确')
+    except Exception as e:
+        return HttpResponseBadRequest(e)
     if user is not None:
         try:
             subject = '狐享会-重置登录密码'
@@ -118,6 +118,7 @@ def passwd_page(request):
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user)
             user.profile.send_reset_password_email=False
+            user.profile.save()
             return render(request, 'reset_passwd.html')
         else:
             return render(request, 'reset_result.html', {'message': '狐享会-重置密码链接已失效...'})
