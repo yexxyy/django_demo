@@ -20,7 +20,7 @@ SERVER_HOST='https://www.sohuhxh.com/'
 
 #SEND MAIL SETTINGS
 EMAIL_HOST='smtp.qq.com'
-EMAIL_PORT='25'
+EMAIL_PORT='465'
 EMAIL_HOST_USER='email-help@foxmail.com'
 EMAIL_HOST_PASSWORD='afgmlyzhvysxcjjf'
 # EMAIL_USE_TLS=True
