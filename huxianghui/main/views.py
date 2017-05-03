@@ -128,11 +128,10 @@ def passwd_page(request):
 
 @csrf_exempt
 @require_POST
-# @login_required
+@login_required
 def reset_passwd(request):
     params=request.POST
-    user_id = request.POST.get('user_id')
-    user = User.objects.get(username=user_id)
+    user=request.user
     base_string=''
     is_success=False
     try:
