@@ -112,7 +112,10 @@ def forget_passwd(request):
 def passwd_page(request):
     code=request.GET.get('code')
     decode_str=base64.b64decode(code)
-    user = User.objects.get(username=decode_str)
+    try:
+        user = User.objects.get(username=decode_str)
+    except:
+        return render(request, 'reset_result.html', {'message': '狐享会-用户不存在'})
     if user is not None:
         if user.profile.send_reset_password_email:
             user.backend = 'django.contrib.auth.backends.ModelBackend'
@@ -123,7 +126,7 @@ def passwd_page(request):
         else:
             return render(request, 'reset_result.html', {'message': '狐享会-重置密码链接已失效...'})
 
-    return HttpResponse('出现了错误')
+    return render(request, 'reset_result.html', {'message': '狐享会-出现了错误'})
 
 
 
