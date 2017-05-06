@@ -1,0 +1,29 @@
+{% extends "build/moc/app_base.html" %}
+{% block title %}搜索{% endblock %}
+
+{% block content %}
+<div class="main">
+  <div class="mui-content page-search">
+    <header class="search-bar-con">
+      <div class="mui-input-row mui-search search-bar-normal">
+        <input id="search" type="search" class="grey" placeholder="搜索" maxlength="20">
+      </div>
+      <div class="search-btn">搜索</div>
+    </header>
+{% verbatim %}
+    <script type="text/x-handlebars-template" id="template_result"> 
+      {{#each this}}
+      <div class="mui-table-view-cell search-cell"   data-href="{{detail_url}}"> 
+       {{title}}
+      </div>
+      {{/each}}
+    </script>
+{% endverbatim %}
+
+    <section class="result-con" id="result_con">
+    </section>
+
+  </div>
+</div>
+
+{% endblock %}

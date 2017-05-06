@@ -1,0 +1,30 @@
+{% extends "build/moc/app_base.html" %}
+{% block title %}登录{% endblock %}
+
+{% block content %}
+<div class="main">
+  <div class="mui-content page-login">
+    <section class="photo-con"><img src="../image/icon/icon-user.png"></section>
+
+    <form id='login_form' class="mui-input-group form-input">
+      <div class="mui-input-row ui-border-b">
+        <input id='account' type="text" class="mui-input-clear mui-input "
+               placeholder="输入手机号" oninput="if(value.length>11)value=value.slice(0,11)"></div>
+      <div class="mui-input-row">
+        <input id='password' type="password" class=" mui-input-clear mui-input input-mode"
+               placeholder="输入密码" oninput="if(value.length>20)value=value.slice(0,20)">
+      </div>
+    </form>
+    <div class="submit-con">
+      <button id='login' type="button" class="mui-btn mui-btn-block mui-red">登录</button>
+
+      <div class="link-area">
+        <span id='reg' class="link-cell">注册账号</span>
+        <span class="spliter">|</span>
+        <span id='forget_psw' class="link-cell">忘记密码</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

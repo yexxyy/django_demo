@@ -1,0 +1,57 @@
+{% extends "build/moc/app_base.html" %}
+{% block title %}我的{% endblock %}
+
+{% block content %}
+<div class="main">
+  <div class="mui-content page-person">
+    <!--背景模糊-->
+    <header class="header-con">
+      <div class="wrapper">
+        <!--个人信息-->
+        <div class="info-con">
+          <div class="user-photo"><img src="../image/icon/icon-user-2.png"/></div>
+          <div class="user-name">
+            <span id="user_name" class="user-name"></span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!--list start-->
+    <div class="list-con">
+      <ul class="mui-table-view ">
+        <li class="mui-table-view-cell" id="user_info">
+          <a class="mui-navigate-right" href="reg_info.html">
+          我的资料
+        </a></li>
+        <li class="mui-table-view-cell" id="change_pw">
+          <a class="mui-navigate-right" href="reg_change.html">
+          修改密码
+        </a></li>
+        <li class="mui-table-view-cell" id="user-like">
+          <a class="mui-navigate-right" href="reg_like.html">
+          我的收藏
+        </a></li>
+      </ul>
+      <ul class="mui-table-view log-out">
+        <li class="mui-table-view-cell" id="logout">
+          <a href="javascript:;">
+          退出账号
+        </a></li>
+      </ul>
+    </div>
+    <!--list end-->
+  </div>
+
+  <!--footer nav bar-->
+  <nav class="mui-bar mui-bar-tab footer-navbar ui-border-t">
+    <a class="nav-item" href="./index.html"> <span class="mui-icon back-img img-index"></span> <span
+        class="mui-tab-label">明星楼盘</span> </a>
+    <a class="nav-item" href="./list.html"> <span class="mui-icon back-img img-activities"></span> <span
+        class="mui-tab-label">小狐送福</span> </a>
+    <a class="nav-item nav-select" href="javascript:;"> <span class="mui-icon back-img img-select"></span> <span
+        class="mui-tab-label">帮你配对</span> </a>
+    <a class="nav-item nav-person" href="javascript:;"> <span class="mui-icon back-img img-person"></span> <span
+        class="mui-tab-label">我的</span> </a>
+  </nav>
+</div>
+{% endblock %}

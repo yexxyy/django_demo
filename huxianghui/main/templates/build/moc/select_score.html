@@ -1,0 +1,89 @@
+{% extends "build/moc/app_base.html" %}
+{% block title %}帮你配对{% endblock %}
+
+{% block content %}
+<div class="main">
+
+  <div id="pullrefresh" class="mui-content mui-scroll-wrapper page-score">
+    <div class="mui-scroll">
+
+      <header class="select-header">
+        <nav><img src="../image/select-progress.png" alt="nav"></nav>
+        <section class="header-main">
+          <h3>您的购房能力:</h3>
+          <div class="score-star">
+            <div class="icons mui-inline score-star" style="margin-left: 6px;">
+
+              <i data-index="1" class="mui-icon mui-icon-star"></i>
+              <i data-index="2" class="mui-icon mui-icon-star"></i>
+              <i data-index="3" class="mui-icon mui-icon-star"></i>
+              <i data-index="4" class="mui-icon mui-icon-star"></i>
+              <i data-index="5" class="mui-icon mui-icon-star"></i>
+            </div>
+          </div>
+          <div class="score-text">
+            <h2 class="score-key"></h2>
+            <div class="score-info"></div>
+          </div>
+        </section>
+      </header>
+
+      <section class="price-info">
+        <h2>您可以</h2>
+        <div class="price-text">
+          <div class="total-price"><span class="price-title">购买总价</span>
+            <span class="text-advanced total-price-top text-num"></span>
+            <span class="text-advanced">万</span>
+            <span class="text-normal">以内的房子</span>
+          </div>
+
+          <div class="pre-price"><span class="price-title">购买单价</span>
+            <span class="text-advanced pre-price-num text-num"></span>
+            <span class="text-advanced">元/平</span>
+            <span class="text-normal">的房子</span></div>
+          <div class="price-tips">注：本次评估仅适用于购买首套普通住宅，如非首套房，还需要考虑市场政策和开发商的特殊首付要求，如您购买二手房，还需要考虑个人所得税，契税，营业税等相关问题。</div>
+        </div>
+      </section>
+   {% verbatim %}
+      <script type="text/x-handlebars-template" id="template_building">
+        {{#each this}}
+        <div class="list-item mui-table-view-cell no-padding">
+          {{#if is_like}}
+          <div class="list-badge like-btn is-like" data-id="{{id}}" data-status="true">取消</div>
+          {{else}}
+          <div class="list-badge like-btn" data-id="{{id}}" data-status="false">关注</div>
+          {{/if}}
+
+          <div class="wrapper">
+            <div class="cover-large img-con list-tap" data-href="{{detail_url}}">
+              <img src="{{cover_img cover}}" alt="{{cover}}">
+
+              <h2 class="title-text">{{title}}</h2>
+            </div>
+            <div class="item-info">
+              <h3 class="location-text">{{location}}</h3>
+              <div class="price-con">
+                <a class="phone-num img-con" href="tel:{{phone}}">
+                  <img src="../image/icon/icon-phone.png" alt="icon-phone">
+                </a>
+                约<span>{{price}}</span>元/㎡
+              </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+        {{/each}}
+      </script>
+
+      {% endverbatim %}
+
+      <section class="footer-recommend">
+        <h2>为您推荐</h2>
+        <div class="list-con mui-table-view" id="list_con">
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

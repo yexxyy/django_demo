@@ -15,4 +15,4 @@ def get_asstes(request,file_path):
 
 
 def get_index(request):
-    return render(request, 'build/moc/list.html')
+    return render(request, 'build/moc/index.html')

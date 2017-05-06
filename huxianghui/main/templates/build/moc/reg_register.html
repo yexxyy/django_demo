@@ -1,0 +1,29 @@
+{% extends "build/moc/app_base.html" %}
+{% block title %}登录{% endblock %}
+
+{% block content %}
+<div class="main">
+  <div class="mui-content page-reg">
+
+    <form class="mui-input-group">
+      <div class="mui-input-row ui-border-b">
+        <input id='phone' name="phone" type="number" class="mui-input mui-input-clear" placeholder="手机号" oninput="if(value.length>11)value=value.slice(0,11)">
+      </div>
+      <div class="mui-input-row ui-border-b">
+        <input id='email' name="email" type="email" class="mui-input-clear mui-input input-padding-right" placeholder="邮箱地址"  oninput="if(value.length>40)value=value.slice(0,40)">
+      </div>
+      <div class="mui-input-row ui-border-b">
+        <input id='password' name="password" type="password" class="mui-input-clear mui-input input-padding-right input-mode" placeholder="密码" oninput="if(value.length>20)value=value.slice(0,20)">
+      </div>
+      <div class="mui-input-row">
+        <input id='password_confirm' name="password_confirm" type="password" class="mui-input-clear mui-input input-padding-right input-mode" placeholder="确认密码" oninput="if(value.length>20)value=value.slice(0,20)">
+      </div>
+    </form>
+
+    <div class="submit-con">
+      <button id='reg_btn' class="mui-btn mui-red mui-btn-block" type="button">注册</button>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

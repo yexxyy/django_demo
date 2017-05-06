@@ -1,0 +1,88 @@
+{% extends "build/moc/app_base.html" %}
+{% block title %}帮你配对{% endblock %}
+
+{% block content %}
+<div class="main">
+
+  <header class="select-header">
+    <nav><img src="../image/select-progress.png" alt="nav"></nav>
+  </header>
+
+  <div class="mui-content page-select">
+    <section class="label-con">
+      <h2 class="title-con">您的购房目的</h2>
+{% verbatim %}
+      <script type="text/x-handlebars-template" id="template_label_perpose">
+        {{#each this}}
+        <div class="mui-col-xs-4">
+          <section class="label-wrapper">
+            <label class="mui-btn label-btn" for="{{id}}">
+            <input type="radio" name="doc-js-btn" id="{{id}}" class="label-perpose">{{title}}
+          </label></section>
+        </div>
+        {{/each}}
+      </script>
+{% endverbatim %}
+
+      <div class="mui-row" id="perpose_con">
+      </div>
+    </section>
+
+    <section class="label-con">
+      <h2 class="title-con">您的意向区域</h2>
+{% verbatim %}
+      <script type="text/x-handlebars-template" id="template_label_location">
+        {{#each this}}
+        <div class="mui-col-xs-4">
+          <section class="label-wrapper">
+            <label class="mui-btn label-btn" for="{{id}}">
+            <input type="radio" name="doc-js-btn" id="{{id}}" class="label-location">{{title}}
+          </label>
+          </section>
+        </div>
+        {{/each}}
+      </script>
+{% endverbatim %}
+
+      <div class="mui-row" id="location_con">
+      </div>
+    </section>
+
+    <section class="label-con">
+      <h2 class="title-con">您的意向面积</h2>
+{% verbatim %}
+      <script type="text/x-handlebars-template" id="template_label_area">
+        {{#each this}}
+        <div class="mui-col-xs-4">
+          <section class="label-wrapper">
+            <label class="mui-btn label-btn" for="{{id}}">
+            <input type="radio" name="doc-js-btn" id="{{id}}" class="label-area">{{title}}
+          </label>
+          </section>
+        </div>
+        {{/each}}
+      </script>
+{% endverbatim %}
+
+      <div class="mui-row" id="area_con">
+      </div>
+    </section>
+
+    <footer class="submit-btn" data-href="select_input.html">
+      <button type="button" class="mui-btn mui-btn-block submit-loading mui-btn-primary btn-standard">下一步</button>
+    </footer>
+  </div>
+
+  <!--footer nav bar-->
+  <nav class="mui-bar mui-bar-tab footer-navbar ui-border-t">
+    <a class="nav-item" href="./index.html"> <span class="mui-icon back-img img-index"></span> <span
+        class="mui-tab-label">明星楼盘</span> </a>
+    <a class="nav-item" href="./list.html"> <span class="mui-icon back-img img-activities"></span> <span
+        class="mui-tab-label">小狐送福</span> </a>
+    <a class="nav-item nav-select" href="javascript:;"> <span class="mui-icon back-img img-select"></span> <span
+        class="mui-tab-label">帮你配对</span> </a>
+    <a class="nav-item nav-person" href="javascript:;"> <span class="mui-icon back-img img-person"></span> <span
+        class="mui-tab-label">我的</span> </a>
+  </nav>
+</div>
+{% endblock %}

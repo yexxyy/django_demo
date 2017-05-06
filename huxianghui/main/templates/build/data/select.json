@@ -1,0 +1,179 @@
+{
+  "perpose":[
+    {
+      "title": "结婚",
+      "id": "marry"
+    },
+    {
+      "title": "生孩子",
+      "id": "baby"
+    },
+    {
+      "title": "养老人",
+      "id": "old"
+    },
+    {
+      "title": "学区房",
+      "id": "school"
+    },
+    {
+      "title": "小换大",
+      "id": "bigger"
+    },
+    {
+      "title": "有个家",
+      "id": "home"
+    }
+  ],
+
+  "location": [
+    {
+      "title": "不限",
+      "id": "all"
+    },
+    {
+      "title": "锦江",
+      "id": "jinjiang"
+    },
+    {
+      "title": "青羊",
+      "id": "qingyang"
+    },
+    {
+      "title": "金牛",
+      "id": "jinniu"
+    },
+    {
+      "title": "武侯",
+      "id": "wuhou"
+    },
+    {
+      "title": "成华",
+      "id": "chenghua"
+    },
+    {
+      "title": "高新西区",
+      "id": "gaoxinxi"
+    },
+    {
+      "title": "温江",
+      "id": "wenjiang"
+    },
+    {
+      "title": "双流",
+      "id": "shuangliu"
+    },
+    {
+      "title": "龙泉驿",
+      "id": "longquanyi"
+    },
+    {
+      "title": "新都",
+      "id": "xindu"
+    },
+    {
+      "title": "郫县",
+      "id": "pixian"
+    },
+    {
+      "title": "都江堰",
+      "id": "dujiangyan"
+    },
+    {
+      "title": "青白江",
+      "id": "qingbaijiang"
+    },
+    {
+      "title": "彭州",
+      "id": "pengzhou"
+    },
+    {
+      "title": "浦江",
+      "id": "pujiang"
+    },
+    {
+      "title": "大邑",
+      "id": "dayi"
+    },
+    {
+      "title": "新津",
+      "id": "xinjin"
+    },
+    {
+      "title": "崇州",
+      "id": "chognzhou"
+    },
+    {
+      "title": "邛崃",
+      "id": "qionglai"
+    },
+    {
+      "title": "金堂",
+      "id": "jintang"
+    }
+  ],
+  "area": [
+    {
+      "title": "不限",
+      "id": "qionglai"
+    },
+    {
+      "title": "50㎡以下",
+      "id": "50down"
+    },
+    {
+      "title": "50-70㎡",
+      "id": "50"
+    },
+    {
+      "title": "70-90㎡",
+      "id": "70"
+    },
+    {
+      "title": "90-110㎡",
+      "id": "90"
+    },
+    {
+      "title": "110-150㎡",
+      "id": "110"
+    },
+    {
+      "title": "150-200㎡",
+      "id": "150"
+    },
+    {
+      "title": "200-300㎡",
+      "id": "200"
+    },
+    {
+      "title": "300㎡以上",
+      "id": "300"
+    }
+  ],
+  "time": [
+    {
+      "title": "5年及以下",
+      "id": "5y"
+    },
+    {
+      "title": "10年",
+      "id": "10y"
+    },
+    {
+      "title": "15年",
+      "id": "15y"
+    },
+    {
+      "title": "20年",
+      "id": "20y"
+    },
+    {
+      "title": "25年",
+      "id": "25y"
+    },
+    {
+      "title": "30年",
+      "id": "30y"
+    }
+  ]
+}

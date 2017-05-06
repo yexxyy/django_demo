@@ -1,0 +1,37 @@
+{% extends "build/moc/app_base.html" %}
+
+
+{% block title %}报名表{% endblock %}
+{% block content %}
+
+<div class="main">
+  <div class="mui-content page-form">
+
+    <h1 class="title">标题</h1>
+
+    <form id='activity_form' class="mui-input-group form-input">
+      <div class="mui-input-row ui-border-b">
+        <input id='name' name="name" type="text" class="mui-input-clear mui-input input-padding-right"
+               placeholder="您的称呼" oninput="if(value.length>20)value=value.slice(0,20)">
+      </div>
+      <div class="mui-input-row ui-border-b">
+        <input id='phone' name="phone" type="number" class="mui-input-clear mui-input input-padding-right"
+               placeholder="手机号码" oninput="if(value.length>11)value=value.slice(0,11)">
+      </div>
+      <div class="mui-input-row ui-border-b">
+        <input id='address' name="address" type="text" class="mui-input-clear mui-input input-padding-right"
+               placeholder="您的住址" oninput="if(value.length>30)value=value.slice(0,30)">
+      </div>
+
+      <div class="mui-input-row ui-border-b">
+        <input id='join_num' name="join_num" type="num" class="mui-input-clear mui-input input-padding-right"
+               placeholder="参与人数" oninput="if(value.length>1)value=value.slice(0,1)">
+      </div>
+    </form>
+
+    <div class="submit-con">
+      <button id='info_btn' class="mui-btn mui-red mui-btn-block" type="button">立即报名</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
