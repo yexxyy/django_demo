@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^main/',include('main.urls')),
     url(r'^assets/(?P<file_path>.*)',views.get_asstes),
+    url(r'',views.get_index),
 ]
