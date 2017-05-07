@@ -328,8 +328,6 @@ class ActivityBanner(models.Model):
     def to_json(self):
         if self.cover:
             image_url = self.cover.url
-        elif self.activity.cover:
-            image_url = self.activity.cover.url
         else:
             image_url = ""
         this={
