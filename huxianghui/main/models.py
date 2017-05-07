@@ -263,10 +263,18 @@ class Activity(models.Model):
     detail_url=models.CharField(max_length=100,verbose_name='详情链接')
     limit_num=models.IntegerField(verbose_name='人数上限')
     collect_item=models.ManyToManyField(CollectItem,verbose_name='请选择您想收集的用户信息')
+    form_link=models.CharField(max_length=70,verbose_name='报名表链接',blank=True)
     participator=models.ManyToManyField(ParticipatorInfo,verbose_name='已报名用户',blank=True)
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if self.pk is not None:
+            self.form_link = 'https://www.sohuhxh.com/form.html/?{}'.format(self.pk)
+        else:
+            self.form_link = ''
+        super(Activity, self).save(*args, **kwargs)
 
     def get_cover_url(self):
         return self.cover.url if self.cover else ''

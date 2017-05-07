@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^index.html',views.index),
     url(r'^list.html',views.list),
     url(r'^reg_login.html',views.reg_login),
-    url(r'^form.html',views.form),
+    url(r'^form.html/(?P<activity_id>\d+)/$',views.form),
     url(r'^person.html',views.person),
     url(r'^reg_change.html',views.reg_change),
     url(r'^reg_forget.html',views.reg_forget),
