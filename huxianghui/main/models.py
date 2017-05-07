@@ -294,7 +294,7 @@ class Activity(models.Model):
 
     def save(self, *args, **kwargs):
         if self.pk is not None:
-            self.form_link = 'https://www.sohuhxh.com/form.html/{}'.format(self.pk)
+            self.form_link = 'https://www.sohuhxh.com/form.html/{}/'.format(self.pk)
         else:
             self.form_link = ''
         super(Activity, self).save(*args, **kwargs)
@@ -318,10 +318,12 @@ class ActivityBanner(models.Model):
         verbose_name='活动广告'
         verbose_name_plural='活动广告'
     cover= models.ImageField(verbose_name='封面图',upload_to=pic_upload_path,blank=True,default="")
-    activity= models.ForeignKey(Activity,on_delete=models.CASCADE)
+    recommend_id = models.IntegerField(verbose_name='推荐指数(填写：1、2、3...)',blank=True,null=True)
+    title = models.CharField(max_length=30, verbose_name='标题',default="")
+
 
     def __str__(self):
-        return self.activity.title
+        return self.title
 
     def to_json(self):
         if self.cover:
@@ -332,7 +334,7 @@ class ActivityBanner(models.Model):
             image_url = ""
         this={
             "cover":image_url,
-            "activity_id": self.activity.pk,
+            "recommend_id": self.recommend_id,
             "title":self.activity.title,
         }
         return this
