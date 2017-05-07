@@ -248,8 +248,31 @@ class ParticipatorInfo(models.Model):
     user=models.ForeignKey(User,related_name='user_info',verbose_name='关联用户')
 
     def __str__(self):
-        return '用户id：{}。报名信息：姓名-{}，手机-{}，年龄-{}，地址-{}，性别-{}，微信号-{}，生日-{}，邮箱-{}，职业-{}，爱好-{}，身份证-{}'.\
-            format(self.user.username,self.name,self.phone,self.age,self.address,self.gender,self.wechat,self.barthday,self.email,self.work,self.likes,self.id_num)
+        message='用户id：{}。报名信息:'.format(self.user.username)
+        if self.name:
+            message=message+'姓名-{}'.format(self.name)
+        if self.phone:
+            message = message + '，手机-{}'.format(self.phone)
+        if self.age:
+            message = message + '，年龄-{}'.format(self.age)
+        if self.barthday:
+            message = message + '，年龄-{}'.format(self.barthday)
+        if self.address:
+            message = message + '，地址-{}'.format(self.address)
+        if self.gender:
+            message = message + '，性别-{}'.format(self.gender)
+        if self.wechat:
+            message = message + '，微信号-{}'.format(self.wechat)
+        if self.email:
+            message = message + '，邮箱-{}'.format(self.email)
+        if self.work:
+            message = message + '，职业-{}'.format(self.work)
+        if self.likes:
+            message = message + '，爱好-{}'.format(self.likes)
+        if self.id_num:
+            message = message + '，身份证-{}'.format(self.id_num)
+
+        return message
 
 
 
