@@ -24,7 +24,7 @@ def pic_upload_path(instance, filename):
 
 GENDER_CHOICES = (
     ('男', '男'),
-    ('男', '女'),
+    ('女', '女'),
 )
 LOCATIONS=(
     ('锦江区', '锦江区'),('青羊区','青羊区'),('金牛区','金牛区'),('武侯区','武侯区'),('成华区','成华区'),
@@ -199,7 +199,8 @@ class Banner(models.Model):
 ################### 活动 ##################
 
 COLLECT_ITEMS=(
-    ('手机','手机'),('真实姓名','真实姓名'),('年龄','年龄'),('联系地址','联系地址'),
+    ('姓名','姓名'),('性别','性别'),('电话','电话'),('地址','地址'),('微信号','微信号'),
+    ('生日','生日'),('年龄','年龄'),('邮箱','邮箱'),('职业','职业'),('爱好','爱好'),('身份证号','身份证号'),
 )
 
 class CollectItem(models.Model):
@@ -234,13 +235,21 @@ class ParticipatorInfo(models.Model):
         verbose_name='参加者信息'
         verbose_name_plural='参加者信息'
     name=models.CharField(max_length=11,verbose_name='姓名',blank=True,null=True)
-    phone=models.CharField(max_length=11,verbose_name='手机号码',blank=True,null=True)
+    phone=models.CharField(max_length=11,verbose_name='电话',blank=True,null=True)
+    gender = models.CharField(max_length=11, verbose_name='性别', blank=True, null=True,choices=GENDER_CHOICES)
+    wechat = models.CharField(max_length=11, verbose_name='微信号', blank=True, null=True)
+    barthday = models.CharField(max_length=11, verbose_name='生日', blank=True, null=True)
+    email = models.CharField(max_length=11, verbose_name='邮箱', blank=True, null=True)
+    work = models.CharField(max_length=11, verbose_name='职业', blank=True, null=True)
+    likes = models.CharField(max_length=11, verbose_name='爱好', blank=True, null=True)
+    id_num = models.CharField(max_length=18, verbose_name='身份证号', blank=True, null=True)
     age=models.IntegerField(verbose_name='年龄',blank=True,null=True)
-    address=models.CharField(max_length=11,verbose_name='联系地址',blank=True,null=True)
+    address=models.CharField(max_length=11,verbose_name='地址',blank=True,null=True)
     user=models.ForeignKey(User,related_name='user_info',verbose_name='关联用户')
 
     def __str__(self):
-        return '用户id：{}。报名信息：姓名-{}，手机-{}，年龄-{}，地址-{}'.format(self.user.username,self.name,self.phone,self.age,self.address)
+        return '用户id：{}。报名信息：姓名-{}，手机-{}，年龄-{}，地址-{}，性别-{}，微信号-{}，生日-{}，邮箱-{}，职业-{}，爱好-{}，身份证-{}'.\
+            format(self.user.username,self.name,self.phone,self.age,self.address,self.gender,self.wechat,self.barthday,self.email,self.work,self.likes,self.id_num)
 
 
 

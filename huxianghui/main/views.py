@@ -456,6 +456,14 @@ def save_paticipator_info(request):
     phone = params.get('phone')
     age = params.get('age')
     address = params.get('address')
+    gender=params.get('gender')
+    wechat = params.get('wechat')
+    barthday = params.get('barthday')
+    email = params.get('email')
+    work = params.get('work')
+    likes = params.get('likes')
+    id_num = params.get('id_num')
+
     try:
         try:
             activity = Activity.objects.get(pk=activity_id)
@@ -469,7 +477,8 @@ def save_paticipator_info(request):
         if is_registered:
             return HttpResponseBadRequest('您已经报名，请勿重复提交')
         else:
-            participator = ParticipatorInfo(name=name, phone=phone, age=age, address=address, user=user)
+            participator = ParticipatorInfo(name=name, phone=phone, age=age, address=address, user=user,gender=gender,
+                                            wechat=wechat,barthday=barthday,email=email,work=work,likes=likes,id_num=id_num)
             participator.save()
             activity.participator.add(participator)
             activity.save()
