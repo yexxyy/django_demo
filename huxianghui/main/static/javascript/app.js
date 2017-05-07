@@ -51,7 +51,7 @@
         /*
          * each page
          */
-        if (pathname == Route.top) {
+        if (Route.top.match(pathname)) {
             Util.dispatcher(Route.top, function () {
                 Config.currentPage = Route.top;
                 Page.index.init();
