@@ -271,7 +271,7 @@ class Activity(models.Model):
 
     def save(self, *args, **kwargs):
         if self.pk is not None:
-            self.form_link = 'https://www.sohuhxh.com/form.html/?{}'.format(self.pk)
+            self.form_link = 'https://www.sohuhxh.com/form.html/{}'.format(self.pk)
         else:
             self.form_link = ''
         super(Activity, self).save(*args, **kwargs)

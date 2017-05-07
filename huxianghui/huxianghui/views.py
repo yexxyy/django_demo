@@ -20,7 +20,7 @@ def index(request):
 def list(request):
     return render(request, 'build/moc/list.html')
 
-def form(request):
+def form(request,activity_id):
     return render(request, 'build/moc/form.html')
 
 def person(request):
