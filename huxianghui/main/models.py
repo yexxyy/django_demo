@@ -203,11 +203,16 @@ COLLECT_ITEMS=(
     ('生日','生日'),('年龄','年龄'),('邮箱','邮箱'),('职业','职业'),('爱好','爱好'),('身份证号','身份证号'),
 )
 
+GET_KEY={'姓名':'name','性别':'gender','电话':'phone','地址':'address','微信号':'wechat','生日':'barthday',
+         '年龄':'age','邮箱':'eamil','职业':'work','爱好':'likes','身份证号':'id_num'}
+
+
 class CollectItem(models.Model):
     class Meta:
         verbose_name = '用户填写字段'
         verbose_name_plural = '用户填写字段'
     name=models.CharField(max_length=10,verbose_name='字段名称',choices=COLLECT_ITEMS,blank=True)
+    keyword=models.CharField(max_length=15,verbose_name='关键字',editable=False,blank=True)
 
     def __str__(self):
         return self.name
@@ -219,12 +224,14 @@ class CollectItem(models.Model):
             if item.name==self.name:
                 is_added=True
         if is_added==False:
+            self.keyword=GET_KEY[self.name]
             super(CollectItem, self).save(*args, **kwargs)
 
     def to_json(self):
         this={
             'id':self.pk,
             'name':self.name,
+            'keyword':self.keyword,
         }
         return this
 
