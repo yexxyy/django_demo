@@ -8,22 +8,16 @@
     <div class="mui-scroll">
       <!--header banner-->
       {% verbatim %}
-      <!--<script type="text/x-handlebars-template" id="template_banner"> -->
-        <!--{{#each this}}-->
-        <!--<div class="swiper-slide img-con"   data-href="{{detail_url}}"> -->
-          <!--<img src="{{cover_img cover}}" alt="cover">-->
-        <!--</div>-->
-        <!--{{/each}}-->
-      <!--</script>-->
+      <script type="text/x-handlebars-template" id="template_banner"> 
+        {{#each this}}
+        <div class="swiper-slide img-con"   data-href="{{detail_url}}"> 
+          <img src="{{cover_img cover}}" alt="cover">
+        </div>
+        {{/each}}
+      </script>
     {% endverbatim %}
       <header class="swiper-container activity-banner">
         <div class="swiper-wrapper banner-con" id="banner_con">
-          <div class="swiper-slide img-con"   data-href="http://baidu.com"> 
-            <img src="../image/banner_activity.png" alt="cover">
-          </div>
-          <div class="swiper-slide img-con"   data-href="http://baidu.com"> 
-            <img src="../image/banner_activity.png" alt="cover">
-          </div>
         </div>
         <div class="swiper-pagination"></div>
       </header>
