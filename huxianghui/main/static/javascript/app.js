@@ -46,7 +46,7 @@
     var owner = App.owner = {};
 
     var Route = App.Route = {
-        top: host,
+        top: 'www.sohuhxh.com/',
         select: 'select.html',
         activity: 'list.html',
         person: 'person.html',
@@ -83,8 +83,7 @@
         /*
          * each page
          */
-        if (Route.top.indexOf(pathname)!=-1) {
-            console.log(Route.top.indexOf(pathname)!=-1);
+        if (pathname == Route.top) {
             Util.dispatcher(Route.top, function () {
                 Config.currentPage = Route.top;
                 Page.index.init();
@@ -297,7 +296,7 @@
     };
 
     Util.active = function (pathname) {
-        if (pathname == Route.top) {
+        if () {
             $('.img-index').addClass('item-active')
         }
         else if (pathname == Route.activity) {
