@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^main/',include('main.urls')),
     url(r'^assets/(?P<file_path>.*)',views.get_asstes),
 
-    url(r'^index.html',views.index),
+    url(r'^$',views.index),
     url(r'^list.html',views.list),
     url(r'^reg_login.html',views.reg_login),
     url(r'^form.html/(?P<activity_id>\d+)/$',views.form),
