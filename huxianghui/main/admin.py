@@ -13,7 +13,6 @@ admin.site.register(News)
 admin.site.register(Banner)
 admin.site.register(HouseType)
 admin.site.register(Building)
-admin.site.register(Activity)
 admin.site.register(CollectItem)
 admin.site.register(ActivityBanner)
 
@@ -31,3 +30,6 @@ class ProfileInline(admin.StackedInline):
 class UserAdmin(BaseUserAdmin):
     inlines = (ProfileInline,)
 
+@admin.register(Activity)
+class ActivityAdmin(admin.ModelAdmin):
+	list_display=('title','form_link')
