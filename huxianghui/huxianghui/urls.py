@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^reg_forget.html',views.reg_forget),
     url(r'^reg_info.html',views.reg_info),
     url(r'^reg_login.html',views.reg_login),
+    url(r'^reg_like.html',views.reg_like),
     url(r'^reg_register.html',views.reg_register),
     url(r'^search.html',views.search),
     url(r'^select.html',views.select),

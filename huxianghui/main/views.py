@@ -518,7 +518,10 @@ def set_liked(request,building_id):
 # @login_required
 def get_user_likes(request):
     user_id = request.POST.get('user_id')
-    user = User.objects.get(username=user_id)
+    try:
+        user = User.objects.get (username=user_id)
+    except:
+        return HttpResponseBadRequest ('用户不存在')
     likes=user.profile.likes.all()
     json_list=[]
     for like in likes:
@@ -538,7 +541,10 @@ def search_building(request):
     if query is None:
         return HttpResponseBadRequest("参数错误")
     user_id = request.POST.get('user_id')
-    user = User.objects.get(username=user_id)
+    try:
+        user = User.objects.get (username=user_id)
+    except:
+        return HttpResponseBadRequest('用户不存在')
     buildings=Building.objects.filter(title__contains=query).order_by('recommend_id')
 
     json_list = []
