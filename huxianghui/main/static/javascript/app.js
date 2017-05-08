@@ -83,7 +83,8 @@
         /*
          * each page
          */
-        if (Route.top.match(pathname)!=null) {
+        if (Route.top.indexOf(pathname)!=-1) {
+            console.log(Route.top.indexOf(pathname)!=-1);
             Util.dispatcher(Route.top, function () {
                 Config.currentPage = Route.top;
                 Page.index.init();
@@ -1189,7 +1190,7 @@
             var $defer = $.Deferred();
             var options = {
                 type: 'get',
-                url: '../data/select.json'
+                url: host.path_join('static/data/select.json')
             };
             Util.local_ajax(options).done(function (result) {
                 $defer.resolve(result);
