@@ -296,7 +296,7 @@
     };
 
     Util.active = function (pathname) {
-        if () {
+        if (pathname == Route.top) {
             $('.img-index').addClass('item-active')
         }
         else if (pathname == Route.activity) {
