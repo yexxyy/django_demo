@@ -6,7 +6,7 @@
   <div id="pullrefresh" class="mui-content mui-scroll-wrapper refresh-list building-list">
     <div class="mui-scroll">
       <section class="search-con">
-        <img src="../image/icon/icon-search.png" alt="search">
+        <img src="{% static 'image/icon/icon-search.png' %}" alt="search">
       </section>
 
       <!--header banner-->
@@ -34,7 +34,7 @@
       </script>
       {% endverbatim %}
       <section class="focus-container ui-border-b">
-        <div class="title-con img-con"><img src="../image/focus-title.png" alt="狐享会头条"></div>
+        <div class="title-con img-con"><img src="{% static 'image/focus-title.png' %}" alt="狐享会头条"></div>
         <div class="scroll-con" id="scroll_con">
           <section id="news_con">
           </section>
@@ -63,7 +63,7 @@
               <h3 class="location-text">{{location}}</h3>
               <div class="price-con">
                 <a class="phone-num img-con" href="tel:{{phone}}">
-                  <img src="../image/icon/icon-phone.png" alt="icon-phone">
+                  <img src="{% static 'image/icon/icon-phone.png' %}" alt="icon-phone">
                 </a>
                 约<span>{{price}}</span>元/㎡
               </div>
