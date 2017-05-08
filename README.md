@@ -160,7 +160,7 @@ BUILDING_TYPE=(
 
 #### 活动报名：post_participator_info/（login_required/post）
 
->name phone age address (全部选填)
+>name phone age address gender wechat barthday email work likes  (全部选填)
 
 
 
