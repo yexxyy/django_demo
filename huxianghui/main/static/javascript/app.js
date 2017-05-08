@@ -83,7 +83,7 @@
         /*
          * each page
          */
-        if (Route.top.match(pathname)) {
+        if (Route.top.match(pathname)!=null) {
             Util.dispatcher(Route.top, function () {
                 Config.currentPage = Route.top;
                 Page.index.init();
@@ -178,7 +178,7 @@
         if (str == 'like') {
             if (user_id == null) {
                 mui.openWindow({
-                    url: 'reg_login.html'
+                    url: './reg_login.html'
                 })
             } else {
                 return true;
@@ -188,7 +188,7 @@
         if (str == 'list_cell') {
             if (user_id == null) {
                 mui.openWindow({
-                    url: 'reg_login.html'
+                    url: './reg_login.html'
                 })
             } else {
                 var url = $dom.data('href');
@@ -202,7 +202,7 @@
         if (str == 'select') {
             if (user_id == null) {
                 mui.openWindow({
-                    url: 'reg_login.html'
+                    url: './reg_login.html'
                 });
             } else {
                 $dom.attr('href', 'select.html');
@@ -212,7 +212,7 @@
         if (str == 'person') {
             if (user_id == null) {
                 mui.openWindow({
-                    url: 'reg_login.html'
+                    url: './reg_login.html'
                 });
             } else {
                 $dom.attr('href', 'person.html');
@@ -392,8 +392,8 @@
                 owner.createState(login_info.phone, callback);
                 setTimeout(function () {
                     mui.openWindow({
-                        url: 'index.html',
-                        id: 'index'
+                        url: "./person.html",
+                        id: 'person'
                     })
                 }, 1000);
             })
@@ -441,8 +441,8 @@
                 setTimeout(function () {
 
                     mui.openWindow({
-                        url: 'reg_login.html',
-                        id: 'reg'
+                        url: './person.html',
+                        id: 'person'
                     })
                 }, 1000);
                 return callback('注册成功，为您跳转登录');
@@ -1709,13 +1709,13 @@
         var bind = function () {
             $('#reg').on('tap', function () {
                 mui.openWindow({
-                    url: 'reg_register.html'
+                    url: './reg_register.html'
                 })
             });
 
             $('#forget_psw').on('tap', function () {
                 mui.openWindow({
-                    url: 'reg_forget.html'
+                    url: './reg_forget.html'
                 })
             })
 
@@ -1751,7 +1751,7 @@
                                 console.log(owner.getState());
                                 setTimeout(function () {
                                     mui.openWindow({
-                                        url: 'index.html'
+                                        url: host
                                     })
                                 }, 1000)
                             })
