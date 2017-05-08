@@ -333,7 +333,7 @@ class ActivityBanner(models.Model):
         this={
             "cover":image_url,
             "recommend_id": self.recommend_id,
-            "title":self.activity.title,
+            "title":self.title,
         }
         return this
 
