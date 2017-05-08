@@ -214,6 +214,10 @@ p {
   border-color: rgba(233, 37, 37, 0.6) !important;
 }
 
+.hidden {
+  display: none;
+}
+
 /*------------------------------------*    page index
 \*------------------------------------*/
 .search-con {
@@ -371,6 +375,11 @@ p {
 
 .building-list .mui-table-view-cell:after {
   display: none;
+}
+
+.page-activity .swiper-slide {
+  max-height: 90px;
+  max-height: 24vw;
 }
 
 .page-activity.mui-table-view {
