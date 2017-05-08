@@ -1189,7 +1189,7 @@
             var $defer = $.Deferred();
             var options = {
                 type: 'get',
-                url: host.path_join('static/data/select.json')
+                url: '../data/select.json'
             };
             Util.local_ajax(options).done(function (result) {
                 $defer.resolve(result);
