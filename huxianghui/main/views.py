@@ -518,7 +518,10 @@ def set_liked(request,building_id):
 # @login_required
 def get_user_likes(request):
     user_id = request.POST.get('user_id')
-    user = User.objects.get(username=user_id)
+    try:
+        user = User.objects.get (username=user_id)
+    except:
+        return HttpResponseBadRequest ('用户不存在')
     likes=user.profile.likes.all()
     json_list=[]
     for like in likes:
