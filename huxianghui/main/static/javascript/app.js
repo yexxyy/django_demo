@@ -708,7 +708,6 @@
     Util.like = function ($dom, status) {
         var id = $dom.data('id');
         var status = $dom.data('status');
-        alert(status)
 
         Api.like_set.fetch(id)
             .done(function (_data) {
@@ -1421,7 +1420,6 @@
         };
         var bind = function () {
             $('#form_btn').on('tap', function () {
-                alert('in');
                 Api.form_submit.submit(_option)
                     .done(function (_data) {
                         render(_data);
