@@ -326,7 +326,7 @@ class ActivityBanner(models.Model):
         verbose_name_plural='活动广告'
     cover= models.ImageField(verbose_name='封面图',upload_to=pic_upload_path,blank=True,default="")
     recommend_id = models.IntegerField(verbose_name='推荐指数(填写：1、2、3...)',blank=True,null=True)
-    title = models.CharField(max_length=50, verbose_name='标题',default="")
+    link = models.CharField(max_length=50, verbose_name='活动链接',default="")
 
 
     def __str__(self):
@@ -340,7 +340,7 @@ class ActivityBanner(models.Model):
         this={
             "cover":image_url,
             "recommend_id": self.recommend_id,
-            "title":self.title,
+            "link":self.link,
         }
         return this
 

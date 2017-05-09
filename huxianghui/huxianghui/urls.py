@@ -35,7 +35,7 @@ urlpatterns = [
     url(r'^reg_register.html',views.reg_register),
     url(r'^search.html',views.search),
     url(r'^select.html',views.select),
-    url(r'select_input.html^',views.select_input),
+    url(r'^select_input.html',views.select_input),
     url(r'^select_score.html',views.select_score),
     url(r'^test-detail.html', views.test_detail),
     # url(r'^', views.),
