@@ -1663,7 +1663,8 @@ Page.like = (function () {
                 $('#like_con').html(template(_data.list));
             } else {
                 var div ='<div>暂无收藏</div>';
-                $('.empty-con').html(div);
+
+                $('.empty-con').css('height',$(window).height()).html(div);
             }
         };
 
