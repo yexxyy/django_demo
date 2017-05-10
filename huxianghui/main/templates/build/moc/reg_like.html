@@ -5,29 +5,27 @@
 {% block content %}
 <div class="main">
 
-  <div class="mui-content">
-
-    {% verbatim %}
-    <script type="text/x-handlebars-template" id="template_like-cell">
+  <div class="mui-content like-list">
+    <script type="text/x-handlebars-template" id="template_like_cell">
       {{#each this}}
-      <div class="mui-table-view-cell" data-id="{{id}}" style="margin-top:0!important;">
+      <div class="mui-table-view-cell">
         <div class="mui-slider-right mui-disabled">
-          <a class="mui-btn mui-btn-red">删除</a>
+          <a class="mui-btn mui-btn-red delete-btn" data-id="{{id}}">删除</a>
         </div>
 
-        <div class="mui-slider-handle mui-table">
+        <div class="mui-slider-handle mui-table like-cell" data-href="{{detail_url}}">
           <div class="mui-table-cell">
             {{title}}
           </div>
-          <a class="mui-navigate-right"></a>
         </div>
       </div>
       {{/each}}
     </script>
-    {% endverbatim %}
 
     <div class="mui-table-view like-con" id="like_con">
+    </div>
 
+    <div class="empty-con">
     </div>
   </div>
 
