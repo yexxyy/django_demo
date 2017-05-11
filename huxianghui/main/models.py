@@ -328,9 +328,11 @@ class ActivityBanner(models.Model):
     recommend_id = models.IntegerField(verbose_name='推荐指数(填写：1、2、3...)',blank=True,null=True)
     link = models.CharField(max_length=50, verbose_name='活动链接',default="")
 
+    def get_cover_url (self):
+        return self.cover.url if self.cover else ''
 
     def __str__(self):
-        return self.title
+        return self.link if self.link else '暂无活动链接'
 
     def to_json(self):
         if self.cover:
