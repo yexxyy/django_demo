@@ -727,21 +727,21 @@
         }
     };
 
-Util.like = function ($dom, status) {
-    var id = $dom.data('id');
-    var status = $dom.data('status');
-    Api.like_set.fetch(id)
-        .done(function (_data) {
-            console.log(_data);
-            if (status) {
-                $dom.removeClass('is-like');
-                $dom.text('收藏');
-                $dom.attr('data-status', 'false');
-            } else {
-                $dom.addClass('is-like');
-                $dom.text('取消');
-                $dom.attr('data-status', 'true');
-            }
+    Util.like = function ($dom, status) {
+        var id = $dom.data('id');
+        var status = $dom.data('status');
+        Api.like_set.fetch(id)
+            .done(function (_data) {
+                console.log(_data);
+                if (status) {
+                    $dom.removeClass('is-like');
+                    $dom.text('收藏');
+                    $dom.attr('data-status', 'false');
+                } else {
+                    $dom.addClass('is-like');
+                    $dom.text('取消');
+                    $dom.attr('data-status', 'true');
+                }
 
             })
             .fail(function (err_msg, error) {
@@ -1009,22 +1009,22 @@ Util.like = function ($dom, status) {
 
     }(jQuery);
 
-Api.change_psw = function ($) {
-    var submit = function (_option) {
-        var $defer = $.Deferred();
-        var options = {
-            type: 'post',
-            url: 'change_passwd/',
-            data: _option
-        };
+    Api.change_psw = function ($) {
+        var submit = function (_option) {
+            var $defer = $.Deferred();
+            var options = {
+                type: 'post',
+                url: 'change_passwd/',
+                data: _option
+            };
 
-        Util.ajax(options).done(function (result) {
-            $defer.resolve(result);
-        }).fail(function (xhr) {
-            $defer.reject(xhr);
-        });
-        return $defer.promise();
-    };
+            Util.ajax(options).done(function (result) {
+                $defer.resolve(result);
+            }).fail(function (xhr) {
+                $defer.reject(xhr);
+            });
+            return $defer.promise();
+        };
 
         return {
             submit: submit
@@ -1053,7 +1053,7 @@ Api.change_psw = function ($) {
 
     }(jQuery);
 
-    Api.form_get = function ($) {
+    Api.form = function ($) {
         var fetch = function (id) {
             var $defer = $.Deferred();
             var options = {
@@ -1067,13 +1067,7 @@ Api.change_psw = function ($) {
             });
             return $defer.promise();
         };
-        return {
-            fetch: fetch
-        };
 
-    }(jQuery);
-
-    Api.form_submit = function ($) {
         var submit = function (_option) {
             var $defer = $.Deferred();
             var options = {
@@ -1088,54 +1082,75 @@ Api.change_psw = function ($) {
             });
             return $defer.promise();
         };
+
         return {
+            fetch: fetch,
             submit: submit
         };
 
     }(jQuery);
 
-Api.info= function ($) {
-    var submit = function (_option) {
-        var $defer = $.Deferred();
-        var options = {
-            type: 'post',
-            url: 'user_info/',
-            data: _option
+    Api.info = function ($) {
+        var fetch = function () {
+            var $defer = $.Deferred();
+            var options = {
+                type: 'post',
+                url: 'user_info/',
+                data: {
+                    "user_id": owner.getState().user_id
+                }
+            };
+
+            Util.ajax(options).done(function (result) {
+                $defer.resolve(result);
+            }).fail(function (xhr) {
+                $defer.reject(xhr);
+            });
+            return $defer.promise();
         };
-        Util.ajax(options).done(function (result) {
-            $defer.resolve(result);
-        }).fail(function (xhr) {
-            $defer.reject(xhr);
-        });
-        return $defer.promise();
-    };
 
-    return {
-        submit: submit
-    };
-
-}(jQuery);
-
-Api.like_list = function ($) {
-    var fetch = function () {
-        var $defer = $.Deferred();
-        var options = {
-            type: 'post',
-            url: 'get_user_likes/',
-            data:{
-                'user_id': owner.getState().user_id
-            }
+        var submit = function (_option) {
+            var $defer = $.Deferred();
+            var options = {
+                type: 'post',
+                url: 'set_user_info/',
+                data: _option
+            };
+            Util.ajax(options).done(function (result) {
+                $defer.resolve(result);
+            }).fail(function (xhr) {
+                $defer.reject(xhr);
+            });
+            return $defer.promise();
         };
-        Util.ajax(options).done(function (result) {
-            $defer.resolve(result);
-        }).fail(function (xhr) {
-            $defer.reject(xhr);
-        });
-        return $defer.promise();
-    };
-    return {
-        fetch: fetch
-    };
+
+        return {
+            fetch: fetch,
+            submit: submit
+        };
+
+    }(jQuery);
+
+    Api.like_list = function ($) {
+        var fetch = function () {
+            var $defer = $.Deferred();
+            var options = {
+                type: 'post',
+                url: 'get_user_likes/',
+                data: {
+                    'user_id': owner.getState().user_id
+                }
+            };
+            Util.ajax(options).done(function (result) {
+                $defer.resolve(result);
+            }).fail(function (xhr) {
+                $defer.reject(xhr);
+            });
+            return $defer.promise();
+        };
+        return {
+            fetch: fetch
+        };
 
     }(jQuery);
 
@@ -1382,61 +1397,61 @@ Api.like_list = function ($) {
             })
         };
 
-    var bind = function () {
-        $('#change_psw_btn').on('tap', function () {
-            var old_password = $.trim($("#old_password").val());
-            var password0 = $.trim($("#password").val());
-            var password1 = $.trim($("#password_confirm").val());
+        var bind = function () {
+            $('#change_psw_btn').on('tap', function () {
+                var old_password = $.trim($("#old_password").val());
+                var password0 = $.trim($("#password").val());
+                var password1 = $.trim($("#password_confirm").val());
 
-            var _info = {
-                "old_passwd": old_password,
-                "password0": password0,
-                "password1": password1,
-                "user_id":owner.getState().user_id
-            };
+                var _info = {
+                    "old_passwd": old_password,
+                    "password0": password0,
+                    "password1": password1,
+                    "user_id": owner.getState().user_id
+                };
 
-            owner.changePassword(_info, function (err) {
-                if (err) {
-                    mui.toast(err);
-                }
-            });
-        })
-    };
+                owner.changePassword(_info, function (err) {
+                    if (err) {
+                        mui.toast(err);
+                    }
+                });
+            })
+        };
 
-    return {
-        init: init
-    }
-})();
+        return {
+            init: init
+        }
+    })();
 
-Page.forget = (function () {
-    var init = function () {
-        mui.init();
-        mui.ready(function () {
-            bind();
-        })
-    };
-    var bind = function () {
-        $('#forget_psw_btn').on('tap', function () {
-            var email = $.trim($("#email").val());
+    Page.forget = (function () {
+        var init = function () {
+            mui.init();
+            mui.ready(function () {
+                bind();
+            })
+        };
+        var bind = function () {
+            $('#forget_psw_btn').on('tap', function () {
+                var email = $.trim($("#email").val());
 
-            var _info = {
-                "email": email,
-                "user_id": owner.getState().user_id
-            };
+                var _info = {
+                    "email": email,
+                    "user_id": owner.getState().user_id
+                };
 
-            owner.forgetPassword(_info, function (err) {
-                if (err) {
-                    mui.toast(err);
-                }
-            });
-        })
-    };
+                owner.forgetPassword(_info, function (err) {
+                    if (err) {
+                        mui.toast(err);
+                    }
+                });
+            })
+        };
 
-    return {
-        init: init
-    }
+        return {
+            init: init
+        }
 
-})();
+    })();
 
     Page.form = (function () {
         var init = function () {
@@ -1444,7 +1459,7 @@ Page.forget = (function () {
             mui.ready(function () {
                 var id = window.location.href.match(".+/(.+?)([\?#;].*)?$")[1];
 
-                Api.form_get.fetch(id)
+                Api.form.fetch(3)
                     .done(function (_data) {
                         render(_data);
                         bind();
@@ -1486,57 +1501,57 @@ Page.forget = (function () {
                     $('.input-ID').removeClass('hidden');
                 }
 
-        }
-    };
-    var bind = function () {
-        $('#form_btn').on('tap',function () {
-            alert('in');
-            Api.form_submit.submit(_option)
-                .done(function (_data) {
-                    render(_data);
-                    bind();
-                })
-                .fail(function (err_msg, error) {
-                    console.log(err_msg);
-                });
-        })
-    };
+            }
+        };
+        var bind = function () {
+            $('#form_btn').on('tap', function () {
+                alert('in');
+                Api.form.submit(_option)
+                    .done(function (_data) {
+                        render(_data);
+                        bind();
+                    })
+                    .fail(function (err_msg, error) {
+                        console.log(err_msg);
+                    });
+            })
+        };
 
         return {
             init: init
         }
     })();
 
-Page.index = (function () {
-    var init = function () {
-        mui.init({
-            pullRefresh: {
-                container: '#pullrefresh',
-                down: {
-                    contentdown: ' ',
-                    contentover: ' ',
-                    contentrefresh: ' ',
-                    callback: Util.refresh().pulldownRefresh
-                },
-                up: {
-                    contentdown: '',
-                    contentover: '',
-                    contentrefresh: '',
-                    contentnomore:'已经全部加载完',
-                    callback: Util.refresh().pullupRefresh_building
+    Page.index = (function () {
+        var init = function () {
+            mui.init({
+                pullRefresh: {
+                    container: '#pullrefresh',
+                    down: {
+                        contentdown: ' ',
+                        contentover: ' ',
+                        contentrefresh: ' ',
+                        callback: Util.refresh().pulldownRefresh
+                    },
+                    up: {
+                        contentdown: '',
+                        contentover: '',
+                        contentrefresh: '',
+                        contentnomore: '已经全部加载完',
+                        callback: Util.refresh().pullupRefresh_building
+                    }
                 }
-            }
-        });
-        mui.ready(function () {
-            Util.swiper();
-            Api.banner.fetch()
-                .done(function (_data) {
-                    render_banner(_data);
-                    bind_banner();
-                })
-                .fail(function (err_msg, error) {
-                    console.log(err_msg);
-                });
+            });
+            mui.ready(function () {
+                Util.swiper();
+                Api.banner.fetch()
+                    .done(function (_data) {
+                        render_banner(_data);
+                        bind_banner();
+                    })
+                    .fail(function (err_msg, error) {
+                        console.log(err_msg);
+                    });
 
                 Api.news.fetch()
                     .done(function (_data) {
@@ -1590,192 +1605,202 @@ Page.index = (function () {
 
     })();
 
-Page.info = (function () {
-    var init = function () {
-        mui.init();
-        mui.ready(function () {
-            render();
-            bind();
-        })
-    };
-    var picker_sex = function () {
-        var picker = new mui.PopPicker();
-        picker.setData([
-            {text: '男'},
-            {text: '女'}
-        ]);
-        var picker_btn = document.getElementById('gender');
-        picker_btn.addEventListener('tap', function (event) {
-            picker.show(function (items) {
-                console.log(items)
-                picker_btn.innerText = items[0].text;
-                localStorage.setItem('gender', items[0].text);
-                $('#gender').val(localStorage.getItem('gender'));
-            });
-        }, false);
-    };
+    Page.info = (function () {
+        var init = function () {
+            mui.init();
+            mui.ready(function () {
+                Api.info.fetch()
+                    .done(function (_data) {
+                        console.log(_data)
+                        render(_data)
 
-    var picker_location = function () {
-        var picker = new mui.PopPicker();
-        picker.setData([
-            {
-                text: "锦江"
-            },
-            {
-                text: "青羊"
-            },
-            {
-                text: "金牛"
-            },
-            {
-                text: "武侯"
-            },
-            {
-                text: "成华"
-            },
-            {
-                text: "高新西区"
-            },
-            {
-                text: "温江"
-            },
-            {
-                text: "双流"
-            },
-            {
-                text: "龙泉驿"
-            },
-            {
-                text: "新都"
-            },
-            {
-                text: "郫县"
-            },
-            {
-                text: "都江堰"
-            },
-            {
-                text: "青白江"
-            },
-            {
-                text: "彭州"
-            },
-            {
-                text: "浦江"
-            },
-            {
-                text: "大邑"
-            },
-            {
-                text: "新津"
-            },
-            {
-                text: "崇州"
-            },
-            {
-                text: "邛崃"
-            },
-            {
-                text: "金堂"
-            }
-        ]);
-        var picker_btn = document.getElementById('location');
-        picker_btn.addEventListener('tap', function (event) {
+                    })
+                    .fail(function () {
 
-            picker.show(function (items) {
-                console.log(items);
-                picker_btn.innerText = items[0].text;
-                localStorage.setItem('location', items[0].text);
-                $('#location').val(localStorage.getItem('location'));
-            });
-        }, false);
-    };
+                    });
+                bind();
+            })
+        };
 
-    var picker_type = function () {
-        var picker = new mui.PopPicker();
-        picker.setData([
-            {text: '普通住宅'},
-            {text: '花园洋房'},
-            {text: '别墅'},
-            {text: '商铺'},
-            {text: '写字楼'},
-            {text: '公寓'}
-        ]);
-        var picker_btn = document.getElementById('type');
-        picker_btn.addEventListener('tap', function (event) {
-            picker.show(function (items) {
-                picker_btn.innerText = items[0].text;
-                localStorage.setItem('type', items[0].text);
-                $('#type').val(localStorage.getItem('type'));
-            });
-        }, false);
-    };
+        //fetch
+        var render = function (_data) {
+            $('#name').val(_data.user_info.name);
+            $('#wechat').val(_data.user_info.weichat);
+            $('#address').val(_data.user_info.address);
 
-    //fetch
-    var render = function () {
-        $('#name').val(localStorage.getItem('name'));
-        $('#wechat').val(localStorage.getItem('wechat'));
-        $('#address').val(localStorage.getItem('address'));
+            $('#gender').val(_data.user_info.gender);
+            $('#location').val(_data.user_info.regions);
+            $('#type').val(_data.user_info.styles);
+        };
 
-        $('#gender').val(localStorage.getItem('gender'));
-        $('#location').val(localStorage.getItem('location'));
-        $('#type').val(localStorage.getItem('type'));
-    };
-
-    var bind = function () {
-        picker_sex();
-        picker_location();
-        picker_type();
-
-        $('#info_btn').on('tap', function () {
-            var name = $.trim($("#name").val());
-            var wechat = $.trim($("#wechat").val());
-            var address = $.trim($("#address").val());
-
-            localStorage.setItem('name', name);
-            localStorage.setItem('wechat', wechat);
-            localStorage.setItem('address', address);
-
-            var _option = {
-                "weichat": localStorage.getItem('wechat'),
-                "name": localStorage.getItem('name'),
-                "address": localStorage.getItem('address'),
-                "styles": localStorage.getItem('type'),
-                "gender": localStorage.getItem('gender'),
-                "regions ": localStorage.getItem('location'),
-                "user_id": owner.getState().user_id
-            };
-            console.log(_option);
-
-            Api.info.submit(_option)
-                .done(function (_data) {
-                    console.log(_data);
-                    mui.toast('资料提交成功')
-                })
-                .fail(function (err_msg, error) {
-                    console.log(err_msg);
+        var picker_sex = function () {
+            var picker = new mui.PopPicker();
+            picker.setData([
+                {text: '男'},
+                {text: '女'}
+            ]);
+            var picker_btn = document.getElementById('gender');
+            picker_btn.addEventListener('tap', function (event) {
+                picker.show(function (items) {
+                    console.log(items)
+                    picker_btn.innerText = items[0].text;
+                    localStorage.setItem('gender', items[0].text);
+                    $('#gender').val(localStorage.getItem('gender'));
                 });
-        })
-    };
+            }, false);
+        };
 
-    return {
-        init: init
-    }
-})();
+        var picker_location = function () {
+            var picker = new mui.PopPicker();
+            picker.setData([
+                {
+                    text: "锦江"
+                },
+                {
+                    text: "青羊"
+                },
+                {
+                    text: "金牛"
+                },
+                {
+                    text: "武侯"
+                },
+                {
+                    text: "成华"
+                },
+                {
+                    text: "高新西区"
+                },
+                {
+                    text: "温江"
+                },
+                {
+                    text: "双流"
+                },
+                {
+                    text: "龙泉驿"
+                },
+                {
+                    text: "新都"
+                },
+                {
+                    text: "郫县"
+                },
+                {
+                    text: "都江堰"
+                },
+                {
+                    text: "青白江"
+                },
+                {
+                    text: "彭州"
+                },
+                {
+                    text: "浦江"
+                },
+                {
+                    text: "大邑"
+                },
+                {
+                    text: "新津"
+                },
+                {
+                    text: "崇州"
+                },
+                {
+                    text: "邛崃"
+                },
+                {
+                    text: "金堂"
+                }
+            ]);
+            var picker_btn = document.getElementById('location');
+            picker_btn.addEventListener('tap', function (event) {
 
-Page.input = (function () {
-    var init = function () {
-        mui.init();
-        mui.ready(function () {
-            Api.select.fetch()
-                .done(function (_data) {
-                    render(_data);
-                    bind()
-                })
-                .fail(function (err_msg, error) {
-                    console.log(err_msg);
+                picker.show(function (items) {
+                    console.log(items);
+                    picker_btn.innerText = items[0].text;
+                    localStorage.setItem('location', items[0].text);
+                    $('#location').val(localStorage.getItem('location'));
                 });
-        });
+            }, false);
+        };
+
+        var picker_type = function () {
+            var picker = new mui.PopPicker();
+            picker.setData([
+                {text: '普通住宅'},
+                {text: '花园洋房'},
+                {text: '别墅'},
+                {text: '商铺'},
+                {text: '写字楼'},
+                {text: '公寓'}
+            ]);
+            var picker_btn = document.getElementById('type');
+            picker_btn.addEventListener('tap', function (event) {
+                picker.show(function (items) {
+                    picker_btn.innerText = items[0].text;
+                    localStorage.setItem('type', items[0].text);
+                    $('#type').val(localStorage.getItem('type'));
+                });
+            }, false);
+        };
+
+
+        var bind = function () {
+            picker_sex();
+            picker_location();
+            picker_type();
+
+            $('#info_btn').on('tap', function () {
+                var name = $.trim($("#name").val());
+                var wechat = $.trim($("#wechat").val());
+                var address = $.trim($("#address").val());
+
+                localStorage.setItem('name', name);
+                localStorage.setItem('wechat', wechat);
+                localStorage.setItem('address', address);
+
+                var _option = {
+                    "weichat": localStorage.getItem('wechat'),
+                    "name": localStorage.getItem('name'),
+                    "address": localStorage.getItem('address'),
+                    "styles": localStorage.getItem('type'),
+                    "gender": localStorage.getItem('gender'),
+                    "regions": localStorage.getItem('location'),
+                    "user_id": owner.getState().user_id
+                };
+                console.log(_option);
+
+                Api.info.submit(_option)
+                    .done(function (_data) {
+                        console.log(_data);
+                        mui.toast('资料提交成功')
+                    })
+                    .fail(function (err_msg, error) {
+                        console.log(err_msg);
+                    });
+            })
+        };
+
+        return {
+            init: init
+        }
+    })();
+
+    Page.input = (function () {
+        var init = function () {
+            mui.init();
+            mui.ready(function () {
+                Api.select.fetch()
+                    .done(function (_data) {
+                        render(_data);
+                        bind()
+                    })
+                    .fail(function (err_msg, error) {
+                        console.log(err_msg);
+                    });
+            });
 
             var render = function (_data) {
                 console.log(_data);
@@ -1987,18 +2012,18 @@ Page.input = (function () {
                     "password2": password_confirm
                 };
 
-            owner.reg(reg_info, function (err) {
-                if (err) {
-                    mui.toast(err);
-                }
-            });
-        })
-    };
+                owner.reg(reg_info, function (err) {
+                    if (err) {
+                        mui.toast(err);
+                    }
+                });
+            })
+        };
 
-    return {
-        init: init
-    }
-})();
+        return {
+            init: init
+        }
+    })();
 
     Page.score = (function () {
         var init = function () {
