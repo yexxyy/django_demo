@@ -40,6 +40,18 @@ def signup(request):
     elif len(email)==0:
         return HttpResponseBadRequest('邮箱为空')
     try:
+        user = User.objects.get(email=email)
+    except Exception as e:
+        print HttpResponseBadRequest (e)
+    if user is not None:
+        return HttpResponseBadRequest('该邮箱已注册')
+    try:
+        user = User.objects.get (username=phone)
+    except Exception as e:
+        print HttpResponseBadRequest (e)
+    if user is not None:
+        return HttpResponseBadRequest ('该手机号已注册')
+    try:
         user=User.objects.create_user(username=phone,password=password,email=email)
         profile=Profile(user=user)
         profile.save()
@@ -59,6 +71,12 @@ def signin(request):
         password=params['password']
     except:
         HttpResponseBadRequest('参数不正确')
+    try:
+        user = User.objects.get(username=phone)
+    except Exception as e:
+        print HttpResponseBadRequest (e)
+    if user is  None:
+        return HttpResponseBadRequest ('手机号未注册')
 
     user=authenticate(username=phone,password=password)
     if user is not None:
@@ -67,7 +85,7 @@ def signin(request):
             return HttpResponse('登录成功')
         else:
             return HttpResponseBadRequest('账号未激活')
-    return HttpResponseBadRequest('账号或密码不对')
+    return HttpResponseBadRequest('密码不对')
 
 
 @csrf_exempt

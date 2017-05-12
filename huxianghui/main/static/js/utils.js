@@ -16,6 +16,7 @@ $(function () {
 			success: function (res) {
 				console.log('success')
 				console.log(res)
+				$(document).find("html").html(res);
 			},
 			error: function (xhr) {
 				console.log('failed')
