@@ -41,24 +41,25 @@ def signup(request):
         return HttpResponseBadRequest('邮箱为空')
     try:
         user = User.objects.get(email=email)
+        if user is not None:
+            return HttpResponseBadRequest ('该邮箱已注册')
     except Exception as e:
         print HttpResponseBadRequest (e)
-    if user is not None:
-        return HttpResponseBadRequest('该邮箱已注册')
     try:
         user = User.objects.get (username=phone)
+        if user is not None:
+            return HttpResponseBadRequest ('该手机号已注册')
     except Exception as e:
         print HttpResponseBadRequest (e)
-    if user is not None:
-        return HttpResponseBadRequest ('该手机号已注册')
+
     try:
-        user=User.objects.create_user(username=phone,password=password,email=email)
-        profile=Profile(user=user)
-        profile.save()
+        user = User.objects.create_user (username=phone, password=password, email=email)
+        profile = Profile (user=user)
+        profile.save ()
         print 'success!'
-    except Exception,e :
+    except Exception, e:
         print e
-        return HttpResponseBadRequest(e)
+        return HttpResponseBadRequest (e)
     return HttpResponse('注册成功')
 
 
@@ -73,19 +74,21 @@ def signin(request):
         HttpResponseBadRequest('参数不正确')
     try:
         user = User.objects.get(username=phone)
-    except Exception as e:
-        print HttpResponseBadRequest (e)
-    if user is  None:
-        return HttpResponseBadRequest ('手机号未注册')
-
-    user=authenticate(username=phone,password=password)
-    if user is not None:
-        if user.is_active:
-            login(request,user)
-            return HttpResponse('登录成功')
+        if user is None:
+            return HttpResponseBadRequest ('手机号未注册')
+        user = authenticate (username=phone, password=password)
+        if user is not None:
+            if user.is_active:
+                login (request, user)
+                return HttpResponse ('登录成功')
+            else:
+                return HttpResponseBadRequest ('账号未激活')
         else:
-            return HttpResponseBadRequest('账号未激活')
-    return HttpResponseBadRequest('密码不对')
+            return HttpResponseBadRequest ('密码不对')
+    except Exception as e:
+        print e
+        return HttpResponseBadRequest ('手机号未注册')
+    return HttpResponseBadRequest('未知错误')
 
 
 @csrf_exempt
