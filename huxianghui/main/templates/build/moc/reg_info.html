@@ -8,29 +8,30 @@
 
     <form id='info_form' class="mui-input-group form-input">
       <div class="mui-input-row ui-border-b">
-        <input id='name' name="name" type="text" class="mui-input-clear mui-input input-padding-right"
-               placeholder="姓名" oninput="if(value.length>20)value=value.slice(0,20)">
+        <span class="input-title">姓名：</span>
+        <input id='name' name="name" title="name" type="text" class="mui-input-clear mui-input input-padding-right" oninput="if(value.length>20)value=value.slice(0,20)">
       </div>
       <div class="mui-input-row ui-border-b">
-        <input id='wechat' name="email" type="email" class="mui-input-clear mui-input input-padding-right"
-               placeholder="微信号" oninput="if(value.length>30)value=value.slice(0,30)">
+        <span class="input-title">微信号：</span>
+        <input id='wechat' name="email" title="wechat" type="text" class="mui-input-clear mui-input input-padding-right"
+               oninput="if(value.length>30)value=value.slice(0,30)">
       </div>
       <div class="mui-input-row ui-border-b">
-        <input id='address' name="email" type="email" class="mui-input-clear mui-input input-padding-right"
-               placeholder="住址" oninput="if(value.length>30)value=value.slice(0,30)">
-      </div>
-
-      <div class="mui-input-row ui-border-b">
-        <input id='gender' name="gender" type="text" class="picker-btn mui-input input-padding-right"
-               placeholder="性别">
+        <span class="input-title">住址：</span>
+        <input id='address' name="email" title="address" type="text" class="mui-input-clear mui-input input-padding-right"
+              oninput="if(value.length>30)value=value.slice(0,30)">
       </div>
       <div class="mui-input-row ui-border-b">
-        <input id='location' name="location" type="text" class="picker-btn mui-input input-padding-right"
-               placeholder="意向区域">
+        <span class="input-title">性别：</span>
+        <input id='gender' name="gender" title="gender" type="text" class="picker-btn mui-input input-padding-right">
       </div>
       <div class="mui-input-row ui-border-b">
-        <input id='type' name="type" type="text" class="picker-btn mui-input input-padding-right"
-               placeholder="意向类型">
+        <span class="input-title">意向区域：</span>
+        <input id='location' name="location" title="location" type="text" class="picker-btn mui-input input-padding-right">
+      </div>
+      <div class="mui-input-row ui-border-b">
+        <span class="input-title">意向类型：</span>
+        <input id='type' name="type" type="text" title="type" class="picker-btn mui-input input-padding-right">
       </div>
     </form>
 
