@@ -24,7 +24,7 @@ URL: http://0.0.0.0:8101/main/ + ...
 #### 获取用户收藏：get_user_likes/ （login_required／get）
 
 #### 设置用户信息：set_user_info/ （login_required/post）
->name address gender(男／女) sytles (BUILDING_TYPE) regions (LOCATIONS 取值范围见楼盘API)
+>name address gender(男／女) styles (BUILDING_TYPE) regions (LOCATIONS 取值范围见楼盘API)
 weichat
 
 *备注：所有选填项目必须属于给定的取值范围，否则后台无法正确显示*
