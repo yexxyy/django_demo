@@ -963,27 +963,28 @@
 
     }(jQuery);
 
-    Api.building = function ($) {
-        var fetch = function (page) {
-            var $defer = $.Deferred();
-            var options = {
-                type: 'post',
-                url: 'bulidings/{0}/'.format(page),
-                data: {
-                    "user_id": owner.getState().user_id
-                }
-            };
-            Util.ajax(options).done(function (result) {
-                $defer.resolve(result);
-            }).fail(function (xhr) {
-                $defer.reject(xhr);
-            });
-            return $defer.promise();
+Api.building = function ($) {
+    var fetch = function (page) {
+        var $defer = $.Deferred();
+        var options = {
+            type: 'post',
+            url: 'bulidings/{0}/'.format(page),
+            data:{
+                "user_id":owner.getState().user_id
+            }
         };
 
-        return {
-            fetch: fetch
-        };
+        Util.ajax(options).done(function (result) {
+            $defer.resolve(result);
+        }).fail(function (xhr) {
+            $defer.reject(xhr);
+        });
+        return $defer.promise();
+    };
+
+    return {
+        fetch: fetch
+    };
 
     }(jQuery);
 
@@ -1603,7 +1604,7 @@
             init: init
         };
 
-    })();
+})();
 
 Page.info = (function () {
     var init = function () {
@@ -1611,7 +1612,6 @@ Page.info = (function () {
         mui.ready(function () {
             Api.info.fetch()
                 .done(function (_data) {
-                    console.log(_data)
                     render(_data)
                 })
                 .fail(function () {
@@ -1623,6 +1623,7 @@ Page.info = (function () {
 
     //fetch
     var render = function (_data) {
+
         var name = _data.user_info.name;
         var weichat = _data.user_info.weichat;
         var address = _data.user_info.address;
@@ -1630,30 +1631,19 @@ Page.info = (function () {
         var regions = _data.user_info.regions;
         var styles = _data.user_info.styles;
 
-        if (name != null) {
-            $('#name').val(name);
-            localStorage.setItem('name', name);
-        }
-        if (weichat != null) {
-            $('#wechat').val(weichat);
-            localStorage.setItem('weichat', weichat);
-        }
-        if (address != null) {
-            $('#address').val(address);
-            localStorage.setItem('address', address);
-        }
-        if (gender != null) {
-            $('#gender').val(gender);
-            localStorage.setItem('gender', gender);
-        }
-        if (regions != null) {
-            $('#location').val(regions);
-            localStorage.setItem('regions', regions);
-        }
-        if (styles != null) {
-            $('#type').val(styles);
-            localStorage.setItem('styles', styles);
-        }
+        $('#name').val(name);
+        localStorage.setItem('name', name);
+        $('#wechat').val(weichat);
+        localStorage.setItem('weichat', weichat);
+        $('#address').val(address);
+        localStorage.setItem('address', address);
+        $('#gender').val(gender);
+        localStorage.setItem('gender', gender);
+        $('#location').val(regions);
+        localStorage.setItem('regions', regions);
+        $('#type').val(styles);
+        localStorage.setItem('styles', styles);
+
     };
 
     var picker_sex = function () {
@@ -1665,10 +1655,8 @@ Page.info = (function () {
         var picker_btn = document.getElementById('gender');
         picker_btn.addEventListener('tap', function (event) {
             picker.show(function (items) {
-                console.log(items)
-                picker_btn.innerText = items[0].text;
+                $('#gender').val(items[0].text);
                 localStorage.setItem('gender', items[0].text);
-                $('#gender').val(localStorage.getItem('gender'));
             });
         }, false);
     };
@@ -1741,10 +1729,8 @@ Page.info = (function () {
         picker_btn.addEventListener('tap', function (event) {
 
             picker.show(function (items) {
-                console.log(items);
-                picker_btn.innerText = items[0].text;
+                $('#location').val(items[0].text);
                 localStorage.setItem('regions', items[0].text);
-                $('#location').val(localStorage.getItem('regions'));
             });
         }, false);
     };
@@ -1762,9 +1748,8 @@ Page.info = (function () {
         var picker_btn = document.getElementById('type');
         picker_btn.addEventListener('tap', function (event) {
             picker.show(function (items) {
-                picker_btn.innerText = items[0].text;
+                $('#type').val(items[0].text);
                 localStorage.setItem('styles', items[0].text);
-                $('#type').val(localStorage.getItem('styles'));
             });
         }, false);
     };
