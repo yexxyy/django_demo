@@ -20,15 +20,18 @@
                placeholder="住址" oninput="if(value.length>30)value=value.slice(0,30)">
       </div>
 
-      <button id='sex' class="picker-btn ui-border-b" type='button'>性别</button>
-      <div id='sex_result' class="ui-alert"></div>
-
-      <button id='location' class="picker-btn ui-border-b" type='button'>意向区域</button>
-      <div id='location_result' class="ui-alert"></div>
-
-      <button id='type' class="picker-btn ui-border-b" type='button'>意向类型</button>
-      <div id='type_result' class="ui-alert"></div>
-
+      <div class="mui-input-row ui-border-b">
+        <input id='gender' name="gender" type="text" class="picker-btn mui-input input-padding-right"
+               placeholder="性别">
+      </div>
+      <div class="mui-input-row ui-border-b">
+        <input id='location' name="location" type="text" class="picker-btn mui-input input-padding-right"
+               placeholder="意向区域">
+      </div>
+      <div class="mui-input-row ui-border-b">
+        <input id='type' name="type" type="text" class="picker-btn mui-input input-padding-right"
+               placeholder="意向类型">
+      </div>
     </form>
 
     <div class="submit-con">
