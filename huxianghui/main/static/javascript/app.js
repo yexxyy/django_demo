@@ -24,18 +24,17 @@
     var setionid = getCookie('setionid');
 
 
-    function csrfSafeMethod(method) {
-        // these HTTP methods do not require CSRF protection
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
-
-    $.ajaxSetup({
-        beforeSend: function (xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function (xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
         }
-    });
+    }
+});
 
     var App = window.App = {};
     var Util = App.Util = {};
@@ -73,12 +72,13 @@
         //nav active
         Util.active(pathname);
 
-        /*
-         * all
-         */
-        Util.dispatcher('.', function () {
-            Page.all.init();
-        });
+    /*
+     * all
+     */
+    Util.dispatcher('.', function () {
+        Page.all.init();
+        Util.is_pc(pathname);
+    });
 
         /*
          * each page
@@ -271,9 +271,61 @@
         return location_name
     });
 
-    /*
-     * local
-     */
+Util.is_pc = function (pathname) {
+
+    var render = function () {
+        if ($(window).width() > 414) {
+            $('.main').addClass('main-pc');
+            if (pathname == Route.person) {
+                $('.tab-con').removeClass('hidden');
+                $('#user_info').find('a').attr('href', 'javascript:;');
+                $('#user_like').find('a').attr('href', 'javascript:;');
+                $('#change_psw').find('a').attr('href', 'javascript:;');
+                Page.like.init();
+                bind()
+            }
+        }
+    };
+    var list_status_change = function ($this) {
+        $('.mui-table-view-cell').removeClass('is-active');
+        $this.addClass('is-active');
+    };
+    var bind = function () {
+        var $info = $('.page-info');
+        var $change = $('.page-change-psw');
+        var $like = $('.like-list');
+
+
+        $('#user_info').click(function () {
+            list_status_change($(this));
+            $info.removeClass('hidden');
+            $change.addClass('hidden');
+            $like.addClass('hidden')
+            Page.info.init();
+        });
+
+        $('#user_like').click(function () {
+            list_status_change($(this));
+            $like.removeClass('hidden');
+            $change.addClass('hidden');
+            $info.addClass('hidden')
+        });
+
+        $('#change_psw').click(function () {
+            list_status_change($(this));
+            $change.removeClass('hidden');
+            $info.addClass('hidden');
+            $like.addClass('hidden');
+            Page.change.init();
+        })
+    };
+    render();
+
+};
+
+/*
+ * local
+ */
 
     Util.local_ajax = function (_option) {
         var baseUrl = _option.url;
@@ -1379,16 +1431,15 @@ Api.building = function ($) {
 
     })();
 
-    Page.all = (function () {
-        var init = function () {
-            Util.string.path_join();
-            Util.string.format();
-
-        };
-        return {
-            init: init
-        };
-    })();
+Page.all = (function () {
+    var init = function () {
+        Util.string.path_join();
+        Util.string.format();
+    };
+    return {
+        init: init
+    };
+})();
 
     Page.change = (function () {
         var init = function () {

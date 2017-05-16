@@ -21,14 +21,6 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-.img-con {
-  line-height: 0 !important;
-}
-
-.img-con img {
-  width: 100%;
-}
-
 a {
   padding: 0;
   margin: 0;
@@ -58,14 +50,20 @@ p {
 .main {
   width: 100%;
   height: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
   font-weight: 200;
   background-color: #f5f5f5;
 }
 
 .clear {
   clear: both;
+}
+
+.img-con {
+  line-height: 0 !important;
+}
+
+.img-con img {
+  width: 100%;
 }
 
 /*--------------------------1px hack*/
@@ -215,6 +213,18 @@ p {
 .refresh-list {
   left: 0;
   bottom: 50px;
+}
+
+@media (max-width: 414px) {
+  .sm-hidden {
+    display: none;
+  }
+}
+
+@media (min-width: 415px) {
+  .md-hidden {
+    display: none;
+  }
 }
 
 .mui-picker {
@@ -540,6 +550,36 @@ p {
   display: none;
 }
 
+@media (min-width: 415px) {
+  html, body {
+    width: 100%;
+    height: 100%;
+  }
+  .refresh-list {
+    width: 100%;
+    max-width: 1000px;
+    margin: 50px auto 0;
+    position: static;
+  }
+  .refresh-list .mui-scroll {
+    position: relative;
+  }
+  .col-4 {
+    width: 33.3%;
+    float: left;
+  }
+  .col-4 .cover-con {
+    padding-top: 44%;
+    position: relative;
+    overflow: hidden;
+  }
+  .col-4 .cover-con img {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
 .page-activity .swiper-slide {
   max-height: 90px;
   max-height: 24vw;
@@ -549,8 +589,12 @@ p {
   background: none;
 }
 
+.page-activity .mui-table-view:after, .page-activity .mui-table-view:before {
+  display: none;
+}
+
 .page-activity .list-item {
-  margin-bottom: 5px;
+  padding-bottom: 0 !important;
 }
 
 .page-activity .list-item .title-text {
@@ -563,10 +607,15 @@ p {
 
 .activity-banner {
   min-height: 38px;
+  margin-bottom: 5px;
 }
 
 .activity-banner .swiper-pagination {
   bottom: 0 !important;
+}
+
+.page-select {
+  margin-bottom: 50px;
 }
 
 .select-header {
@@ -732,18 +781,30 @@ p {
   margin-bottom: 0;
 }
 
-@media (min-width: 414px) {
-  .fix-bottom {
-    width: 414px;
+@media (min-width: 415px) {
+  .main-pc {
+    position: relative;
+  }
+  .main-pc.main-select {
+    max-width: 1000px;
+    margin: 55px auto 0;
+    background-color: #f1f1f1;
+  }
+  .md-fix-bottom {
+    width: 100%;
+    max-width: 1000px;
     position: fixed;
     bottom: 0;
-    left: 50%;
-    margin-left: -207px;
+    left: 0;
   }
 }
 
-.page-select {
-  margin-bottom: 50px;
+@media (min-width: 1001px) {
+  .md-fix-bottom {
+    width: 1000px;
+    margin-left: -500px;
+    left: 50%;
+  }
 }
 
 .search-bar-con {
@@ -842,18 +903,24 @@ p {
   color: #666;
 }
 
+.page-info {
+  width: 100%;
+}
+
 .page-info .mui-input-row {
   position: relative;
   width: 100%;
 }
 
 .page-info .mui-input-row .input-title {
-  position: absolute;
   width: 80px;
+  position: absolute;
   left: 12px;
-  top: 13px;
+  top: 0;
   font-weight: 400;
   font-size: 14px;
+  line-height: 50px;
+  color: #333;
 }
 
 .page-info .mui-input-row input {
@@ -861,6 +928,7 @@ p {
   height: 100%;
   padding-left: 80px;
   text-align: left;
+  color: #555;
 }
 
 .mui-input-group input {
@@ -874,7 +942,11 @@ p {
 .like-list {
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  background-color: #f5f5f5;
+}
+
+.like-list .thumb-img {
+  max-width: 60px;
 }
 
 .empty-con {
@@ -889,6 +961,63 @@ p {
   left: 0;
   text-align: center;
   color: #999;
+}
+
+@media (min-width: 415px) {
+  .main-pc.main-person {
+    max-width: 1000px;
+    margin: 60px auto 0;
+  }
+  .page-person {
+    width: 200px;
+    height: 100%;
+    position: relative;
+    background-color: #333;
+  }
+  .page-person .mui-navigate-right:after {
+    display: none;
+  }
+  .page-person .mui-table-view-cell {
+    background-color: #555;
+    color: #fff;
+    height: 40px;
+    padding-top: 12px;
+  }
+  .page-person .mui-table-view-cell:hover {
+    background-color: #ff3d48;
+  }
+  .page-person .is-active {
+    background-color: #ff3d48;
+  }
+  .tab-con {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 200px;
+    background: #fff;
+  }
+  .tab-con .like-list {
+    background-color: #fff;
+  }
+  .tab-con .like-list .like-con {
+    margin-top: 1px;
+  }
+  .tab-con .is-active {
+    display: block;
+  }
+  .main-pc .page-login {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .main-pc .page-reg {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .main-pc .page-info {
+    max-width: 500px;
+    margin: 0 auto;
+  }
 }
 
 .footer-navbar {
@@ -957,6 +1086,25 @@ p {
 
 .item-active + .mui-tab-label {
   color: #ff3d48;
+}
+
+@media (min-width: 415px) {
+  .footer-navbar {
+    top: 0;
+    bottom: auto;
+  }
+  .footer-navbar.mui-bar-tab {
+    display: block;
+  }
+  .footer-navbar .wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .footer-navbar .nav-item {
+    display: inline-block;
+    width: 70px;
+    line-height: 50px;
+  }
 }
 
 .page-form {

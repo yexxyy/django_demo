@@ -5,7 +5,7 @@
 {% block content %}
 <div class="main">
   <div id="pullrefresh" class="mui-content mui-scroll-wrapper refresh-list building-list">
-    <div class="mui-scroll">
+    <div class="mui-scroll no-scroll-pc">
       <section class="search-con">
         <img src="{% static 'image/icon/icon-search.png' %}" alt="search">
       </section>
@@ -47,7 +47,7 @@
       {% verbatim %}
       <script type="text/x-handlebars-template" id="template_building">
         {{#each this}}
-        <div class="list-item mui-table-view-cell no-padding">
+        <div class="list-item mui-table-view-cell no-padding col-4">
           {{#if is_like}}
           <div class="list-badge like-btn is-like" data-id="{{id}}" data-status="true">取消</div>
           {{else}}
@@ -56,7 +56,9 @@
 
           <div class="wrapper">
             <div class="cover-large img-con list-tap" data-href="{{detail_url}}">
-              <img src="{{cover_img cover}}" alt="{{cover}}">
+              <div class="cover-con">
+                <img src="{{cover_img cover}}" alt="{{cover}}">
+              </div>
 
               <h2 class="title-text">{{title}}</h2>
             </div>
@@ -64,11 +66,12 @@
               <h3 class="location-text">{{location}}</h3>
               <div class="price-con">
                 <a class="phone-num img-con" href="tel:{{phone}}">
-                  <img src="https://www.sohuhxh.com/static/image/icon/icon-phone.png" alt=" icon-phone">
+                  <img src="{% static 'image/icon/icon-phone.png' %}" alt=" icon-phone">
                 </a>
                 约<span>{{price}}</span>元/㎡
               </div>
             </div>
+
             <div class="clear"></div>
           </div>
         </div>
@@ -85,15 +88,19 @@
     </div>
   </div>
   <!--footer nav bar-->
-  <nav class="mui-bar mui-bar-tab footer-navbar ui-border-t">
-    <a class="nav-item" href="http://www.sohuhxh.com"> <span class="mui-icon back-img img-index"></span> <span
-        class="mui-tab-label">明星楼盘</span> </a>
-    <a class="nav-item" href="./list.html"> <span class="mui-icon back-img img-activities"></span> <span
-        class="mui-tab-label">小狐送福</span> </a>
-    <a class="nav-item nav-select" href="javascript:;"> <span class="mui-icon back-img img-select"></span> <span
-        class="mui-tab-label">帮你配对</span> </a>
-    <a class="nav-item nav-person" href="javascript:;"> <span class="mui-icon back-img img-person"></span> <span
-        class="mui-tab-label">我的</span> </a>
+  <nav class="mui-bar mui-bar-tab footer-navbar">
+    <div class="wrapper">
+      <a class="nav-item" href="./index.html"> <span class="mui-icon back-img img-index md-hidden"></span> <span
+          class="mui-tab-label">明星楼盘</span> </a>
+      <a class="nav-item" href="./list.html"> <span class="mui-icon back-img img-activities md-hidden"></span> <span
+          class="mui-tab-label">小狐送福</span> </a>
+      <a class="nav-item nav-select" href="javascript:;"> <span class="mui-icon back-img img-select md-hidden"></span>
+        <span
+            class="mui-tab-label">帮你配对</span> </a>
+      <a class="nav-item nav-person" href="javascript:;"> <span class="mui-icon back-img img-person md-hidden"></span>
+        <span
+            class="mui-tab-label">我的</span> </a>
+    </div>
   </nav>
 </div>
 
