@@ -3,8 +3,8 @@
 {% block title %}帮你配对{% endblock %}
 
 {% block content %}
-<div class="main">
-  <header class="select-header">
+<div class="main main-select">
+  <header class="select-header md-hidden">
     <nav>
       <img src="{% static 'image/select-progress.png' %}" alt="nav">
     </nav>
@@ -56,8 +56,22 @@
     </section>
   </div>
 
-  <footer class="submit-btn fix-bottom" data-href="select_score.html">
+  <footer class="submit-btn fix-bottom md-fix-bottom" data-href="select_score.html">
     <button type="button" class="mui-btn mui-btn-block submit-loading mui-btn-primary btn-standard">下一步</button>
   </footer>
+
+  <!--footer nav bar-->
+  <nav class="mui-bar mui-bar-tab footer-navbar sm-hidden">
+    <div class="wrapper">
+      <a class="nav-item" href="./index.html"> <span class="mui-icon back-img img-index md-hidden"></span> <span
+          class="mui-tab-label">明星楼盘</span> </a>
+      <a class="nav-item" href="./list.html"> <span class="mui-icon back-img img-activities md-hidden"></span> <span
+          class="mui-tab-label">小狐送福</span> </a>
+      <a class="nav-item nav-select" href="javascript:;"> <span class="mui-icon back-img img-select md-hidden"></span> <span
+          class="mui-tab-label">帮你配对</span> </a>
+      <a class="nav-item nav-person" href="javascript:;"> <span class="mui-icon back-img img-person md-hidden"></span> <span
+          class="mui-tab-label">我的</span> </a>
+    </div>
+  </nav>
 </div>
 {% endblock %}

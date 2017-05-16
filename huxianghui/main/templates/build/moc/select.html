@@ -3,9 +3,9 @@
 {% block title %}帮你配对{% endblock %}
 
 {% block content %}
-<div class="main">
+<div class="main main-select">
 
-  <header class="select-header">
+  <header class="select-header md-hidden">
     <nav><img src="{% static 'image/select-progress.png' %}" alt="nav"></nav>
   </header>
 
@@ -18,8 +18,8 @@
         <div class="mui-col-xs-4">
           <section class="label-wrapper">
             <label class="mui-btn label-btn" for="{{id}}">
-            <input type="radio" name="doc-js-btn" id="{{id}}" class="label-perpose">{{title}}
-          </label></section>
+              <input type="radio" name="doc-js-btn" id="{{id}}" class="label-perpose">{{title}}
+            </label></section>
         </div>
         {{/each}}
       </script>
@@ -37,8 +37,8 @@
         <div class="mui-col-xs-4">
           <section class="label-wrapper">
             <label class="mui-btn label-btn" for="{{id}}">
-            <input type="radio" name="doc-js-btn" id="{{id}}" class="label-location">{{title}}
-          </label>
+              <input type="radio" name="doc-js-btn" id="{{id}}" class="label-location">{{title}}
+            </label>
           </section>
         </div>
         {{/each}}
@@ -57,8 +57,8 @@
         <div class="mui-col-xs-4">
           <section class="label-wrapper">
             <label class="mui-btn label-btn" for="{{id}}">
-            <input type="radio" name="doc-js-btn" id="{{id}}" class="label-area">{{title}}
-          </label>
+              <input type="radio" name="doc-js-btn" id="{{id}}" class="label-area">{{title}}
+            </label>
           </section>
         </div>
         {{/each}}
@@ -69,21 +69,25 @@
       </div>
     </section>
 
-    <footer class="submit-btn" data-href="select_input.html">
+    <footer class="submit-btn md-fix-bottom" data-href="select_input.html">
       <button type="button" class="mui-btn mui-btn-block submit-loading mui-btn-primary btn-standard">下一步</button>
     </footer>
   </div>
 
   <!--footer nav bar-->
-  <nav class="mui-bar mui-bar-tab footer-navbar ui-border-t">
-    <a class="nav-item" href="http://www.sohuhxh.com"> <span class="mui-icon back-img img-index"></span> <span
-        class="mui-tab-label">明星楼盘</span> </a>
-    <a class="nav-item" href="./list.html"> <span class="mui-icon back-img img-activities"></span> <span
-        class="mui-tab-label">小狐送福</span> </a>
-    <a class="nav-item nav-select" href="javascript:;"> <span class="mui-icon back-img img-select"></span> <span
-        class="mui-tab-label">帮你配对</span> </a>
-    <a class="nav-item nav-person" href="javascript:;"> <span class="mui-icon back-img img-person"></span> <span
-        class="mui-tab-label">我的</span> </a>
+  <nav class="mui-bar mui-bar-tab footer-navbar">
+    <div class="wrapper">
+      <a class="nav-item" href="./index.html"> <span class="mui-icon back-img img-index md-hidden"></span> <span
+          class="mui-tab-label">明星楼盘</span> </a>
+      <a class="nav-item" href="./list.html"> <span class="mui-icon back-img img-activities md-hidden"></span> <span
+          class="mui-tab-label">小狐送福</span> </a>
+      <a class="nav-item nav-select" href="javascript:;"> <span class="mui-icon back-img img-select md-hidden"></span>
+        <span
+            class="mui-tab-label">帮你配对</span> </a>
+      <a class="nav-item nav-person" href="javascript:;"> <span class="mui-icon back-img img-person md-hidden"></span>
+        <span
+            class="mui-tab-label">我的</span> </a>
+    </div>
   </nav>
 </div>
 {% endblock %}

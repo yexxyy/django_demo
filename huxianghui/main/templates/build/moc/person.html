@@ -3,7 +3,7 @@
 {% block title %}我的{% endblock %}
 
 {% block content %}
-<div class="main">
+<div class="main main-person">
   <div class="mui-content page-person">
     <!--背景模糊-->
     <header class="header-con">
@@ -22,37 +22,135 @@
       <ul class="mui-table-view ">
         <li class="mui-table-view-cell" id="user_info">
           <a class="mui-navigate-right" href="reg_info.html">
-          我的资料
-        </a></li>
-        <li class="mui-table-view-cell" id="change_pw">
+            我的资料
+          </a></li>
+        <li class="mui-table-view-cell" id="change_psw">
           <a class="mui-navigate-right" href="reg_change.html">
-          修改密码
-        </a></li>
-        <li class="mui-table-view-cell" id="user-like">
+            修改密码
+          </a></li>
+        <li class="mui-table-view-cell is-active" id="user_like">
           <a class="mui-navigate-right" href="reg_like.html">
-          我的收藏
-        </a></li>
+            我的收藏
+          </a></li>
       </ul>
       <ul class="mui-table-view log-out">
         <li class="mui-table-view-cell" id="logout">
           <a href="javascript:;">
-          退出账号
-        </a></li>
+            退出账号
+          </a></li>
       </ul>
     </div>
     <!--list end-->
   </div>
 
+  <div class="tab-con hidden">
+    <!--like-->
+    <section class="mui-content like-list">
+      <script type="text/x-handlebars-template" id="template_like_cell">
+        {{#each this}}
+        <div class="mui-table-view-cell  mui-media">
+          <div class="mui-slider-right mui-disabled">
+            <a class="mui-btn mui-btn-red delete-btn" data-id="{{id}}">删除</a>
+          </div>
+
+          <div class="mui-slider-handle mui-table like-cell mui-navigate-right" data-href="{{detail_url}}">
+            <div class="mui-table-cell">
+              <img class="mui-media-object mui-pull-left thumb-img" src="{{cover_img cover}}">
+              <div class="mui-media-body">
+                {{title}}
+                <p class='mui-ellipsis'>{{location}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </script>
+
+      <div class="mui-table-view like-con" id="like_con">
+      </div>
+
+      <div class="empty-con">
+      </div>
+    </section>
+    <!--change psw-->
+    <div class="mui-content page-reg page-change-psw hidden">
+
+      <form class="mui-input-group">
+        <div class="mui-input-row ui-border-b">
+          <input id='old_password' name="old_password" type="password" class="mui-input-clear input-mode"
+                 placeholder="旧密码" oninput="if(value.length>20)value=value.slice(0,20)">
+        </div>
+
+        <div class="mui-input-row ui-border-b">
+          <input id='password' name="password" type="password" class="mui-input-clear input-mode" placeholder="新密码"
+                 oninput="if(value.length>20)value=value.slice(0,20)">
+        </div>
+
+        <div class="mui-input-row ui-border-b">
+          <input id='password_confirm' name="password_confirm" type="password" class="mui-input-clear input-mode"
+                 placeholder="确认新密码" oninput="if(value.length>20)value=value.slice(0,20)">
+        </div>
+
+      </form>
+
+      <div class="submit-con">
+        <button id='change_psw_btn' class="mui-btn mui-red mui-btn-block" type="button">提交</button>
+      </div>
+    </div>
+    <!--info-->
+    <div class="mui-content page-info hidden">
+
+      <form id='info_form' class="mui-input-group form-input">
+        <div class="mui-input-row ui-border-b">
+          <span class="input-title">姓名：</span>
+          <input id='name' name="name" title="name" type="text" class="mui-input-clear mui-input input-padding-right" oninput="if(value.length>20)value=value.slice(0,20)">
+        </div>
+        <div class="mui-input-row ui-border-b">
+          <span class="input-title">微信号：</span>
+          <input id='wechat' name="email" title="wechat" type="text" class="mui-input-clear mui-input input-padding-right"
+                 oninput="if(value.length>30)value=value.slice(0,30)">
+        </div>
+        <div class="mui-input-row ui-border-b">
+          <span class="input-title">住址：</span>
+          <input id='address' name="email" title="address" type="text" class="mui-input-clear mui-input input-padding-right"
+                 oninput="if(value.length>30)value=value.slice(0,30)">
+        </div>
+        <div class="mui-input-row ui-border-b">
+          <span class="input-title">性别：</span>
+          <input id='gender' name="gender" title="gender" type="text" class="picker-btn mui-input input-padding-right">
+        </div>
+        <div class="mui-input-row ui-border-b">
+          <span class="input-title">意向区域：</span>
+          <input id='location' name="location" title="location" type="text" class="picker-btn mui-input input-padding-right">
+        </div>
+        <div class="mui-input-row ui-border-b">
+          <span class="input-title">意向类型：</span>
+          <input id='type' name="type" type="text" title="type" class="picker-btn mui-input input-padding-right">
+        </div>
+      </form>
+
+      <div class="submit-con">
+        <button id='info_btn' class="mui-btn mui-red mui-btn-block" type="button">提交</button>
+      </div>
+    </div>
+
+  </div>
+
+
   <!--footer nav bar-->
-  <nav class="mui-bar mui-bar-tab footer-navbar ui-border-t">
-    <a class="nav-item" href="http://www.sohuhxh.com"> <span class="mui-icon back-img img-index"></span> <span
-        class="mui-tab-label">明星楼盘</span> </a>
-    <a class="nav-item" href="./list.html"> <span class="mui-icon back-img img-activities"></span> <span
-        class="mui-tab-label">小狐送福</span> </a>
-    <a class="nav-item nav-select" href="javascript:;"> <span class="mui-icon back-img img-select"></span> <span
-        class="mui-tab-label">帮你配对</span> </a>
-    <a class="nav-item nav-person" href="javascript:;"> <span class="mui-icon back-img img-person"></span> <span
-        class="mui-tab-label">我的</span> </a>
+  <nav class="mui-bar mui-bar-tab footer-navbar">
+    <div class="wrapper">
+      <a class="nav-item" href="./index.html"> <span class="mui-icon back-img img-index md-hidden"></span> <span
+          class="mui-tab-label">明星楼盘</span> </a>
+      <a class="nav-item" href="./list.html"> <span class="mui-icon back-img img-activities md-hidden"></span> <span
+          class="mui-tab-label">小狐送福</span> </a>
+      <a class="nav-item nav-select" href="javascript:;"> <span class="mui-icon back-img img-select md-hidden"></span>
+        <span
+            class="mui-tab-label">帮你配对</span> </a>
+      <a class="nav-item nav-person" href="javascript:;"> <span class="mui-icon back-img img-person md-hidden"></span>
+        <span
+            class="mui-tab-label">我的</span> </a>
+    </div>
   </nav>
 </div>
 {% endblock %}

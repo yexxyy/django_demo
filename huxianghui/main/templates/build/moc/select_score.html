@@ -3,7 +3,7 @@
 {% block title %}帮你配对{% endblock %}
 
 {% block content %}
-<div class="main">
+<div class="main main-select">
 
   <div id="pullrefresh" class="mui-content mui-scroll-wrapper page-score">
     <div class="mui-scroll">
@@ -30,7 +30,7 @@
       </header>
 
       <section class="price-info">
-        <h2>您可以</h2>
+        <h2 class="ui-border-b">您可以</h2>
         <div class="price-text">
           <div class="total-price"><span class="price-title">购买总价</span>
             <span class="text-advanced total-price-top text-num"></span>
@@ -86,5 +86,21 @@
 
     </div>
   </div>
+
+  <!--footer nav bar-->
+  <nav class="mui-bar mui-bar-tab footer-navbar sm-hidden">
+    <div class="wrapper">
+      <a class="nav-item" href="./index.html"> <span class="mui-icon back-img img-index md-hidden"></span> <span
+          class="mui-tab-label">明星楼盘</span> </a>
+      <a class="nav-item" href="./list.html"> <span class="mui-icon back-img img-activities md-hidden"></span> <span
+          class="mui-tab-label">小狐送福</span> </a>
+      <a class="nav-item nav-select" href="javascript:;"> <span class="mui-icon back-img img-select md-hidden"></span>
+        <span
+            class="mui-tab-label">帮你配对</span> </a>
+      <a class="nav-item nav-person" href="javascript:;"> <span class="mui-icon back-img img-person md-hidden"></span>
+        <span
+            class="mui-tab-label">我的</span> </a>
+    </div>
+  </nav>
 </div>
 {% endblock %}
