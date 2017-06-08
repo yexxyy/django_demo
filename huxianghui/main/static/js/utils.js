@@ -17,6 +17,7 @@ $(function () {
 				console.log('success')
 				console.log(res)
 				$(document).find("html").html(res);
+                setTimeout(function () {window.location.href = '/reg_login.html'}, 1000)
 			},
 			error: function (xhr) {
 				console.log('failed')

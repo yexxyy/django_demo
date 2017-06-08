@@ -171,7 +171,7 @@ def reset_passwd(request):
                 user.set_password(password0)
                 user.save()
                 is_success=True
-                message = '{}{}'.format(base_string, '尊敬的狐享会用户，您的密码重置成功！')
+                message = '{}{}'.format(base_string, '尊敬的狐享会用户，您的密码重置成功！正在跳转登录...')
             except:
                 message = '{}{}'.format(base_string, '密码重置失败')
     except:
