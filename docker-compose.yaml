@@ -1,0 +1,27 @@
+#https://github.com/ory/examples/blob/master/full-stack/docker-compose.yml
+
+version: '3'
+services:
+  demo:
+    image: django_demo:dev
+    restart: always
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: yetongxue
+      MYSQL_DATABASE: django_demo
+      MYSQL_PASSWORD: qwersadf
+    ports:
+      - 8100:80
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: yetongxue
+      MYSQL_PASSWORD: qwerasdf
+      MYSQL_DATABASE: django_demo
+    volumes:
+      - ./mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
