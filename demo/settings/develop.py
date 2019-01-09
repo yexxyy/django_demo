@@ -13,6 +13,9 @@ DATABASES = {
         'NAME': 'django_demo',
         'HOST': '127.0.0.1',
         'USER': 'root',
-        'PASSWORD': 'qwerasdf'
+        'PASSWORD': 'qwerasdf',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        }
     }
 }

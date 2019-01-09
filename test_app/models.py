@@ -30,4 +30,4 @@ class Book(models.Model):
     name = models.CharField(max_length=20, help_text='书名')
     author = models.ForeignKey(User, on_delete=True, related_name='books', help_text='作者')
     price = models.FloatField(default=0, help_text='价格,默认0')
-    create_time = models.DateTimeField(auto_created=True)
+    create_time = models.DateTimeField(auto_now_add=True)
