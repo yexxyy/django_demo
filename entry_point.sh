@@ -8,7 +8,7 @@ wait
 python3.6 manage.py migrate --noinput
 
 #加载管理员账号
-python3.6 manage.py loaddata ./superuser.json
+python3.6 manage.py loaddata ./fixture/superuser.json
 
 #收集静态文件
 python3.6 manage.py collectstatic --noinput

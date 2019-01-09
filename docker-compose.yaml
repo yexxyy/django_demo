@@ -1,4 +1,5 @@
 #https://github.com/ory/examples/blob/master/full-stack/docker-compose.yml
+#https://github.com/google/trillian/issues/1164
 
 version: '3'
 services:
@@ -6,22 +7,23 @@ services:
     image: django_demo:dev
     restart: always
     environment:
-      MYSQL_HOST: db
-      MYSQL_USER: yetongxue
-      MYSQL_DATABASE: django_demo
-      MYSQL_PASSWORD: qwersadf
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=yetongxue
+      - MYSQL_DATABASE=django_demo
+      - MYSQL_PASSWORD=qwerasdf
     ports:
       - 8000:80
     depends_on:
-      - db
+      - mysql
 
-  db:
+  mysql:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: yetongxue
-      MYSQL_PASSWORD: qwerasdf
-      MYSQL_DATABASE: django_demo
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=yetongxue
+      - MYSQL_PASSWORD=qwerasdf
+      - MYSQL_DATABASE=django_demo
     volumes:
       - ./mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
