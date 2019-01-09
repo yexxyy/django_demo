@@ -1,18 +1,16 @@
 # Django demo
 
 * Django、Restframework、Swagger
-* Docker、Uwsgi
+* Docker、docker-compose、uwsgi、mysql
 
-### Usage:
+#### Usage:
 1. `docker build -t django_demo:dev ./`
-2. Modify the params of file docker-compose.yaml, then `docker-compose up -d`
+2. `docker-compose up -d`
+3. Admin account and password: admin/qwerasdf
+4. API doc url http://127.0.0.1:8000/api/doc/, sample as follow.
+5. Swagger authorize: add token in admin, input string like `Token 1c7de930611fcc0f047a26922fea8f63f462c01b`
 
-
-Admin Account and Password: admin/qwerasdf
-
-API doc http://host:port/api/doc/, Sample as follow:
-
-![](https://upload-images.jianshu.io/upload_images/1271438-e37f3a1c4103fdbd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](./swagger.png)
 
 
 

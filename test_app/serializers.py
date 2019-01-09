@@ -8,10 +8,24 @@ from test_app.models import *
 from rest_framework.serializers import *
 
 
+class UserSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'nickname', 'avatar', 'birthday')
+
+
+class BookCreateSerializer(ModelSerializer):
+    class Meta:
+        model = Book
+        exclude = ('create_time',)
+
+    author = PrimaryKeyRelatedField(queryset=User.objects.all(), help_text='User id')
+
+
 class BookSerializer(ModelSerializer):
     class Meta:
         model = Book
         fields = '__all__'
         depth = 2
 
-    author = PrimaryKeyRelatedField(queryset=User.objects.all(), help_text='User id')
+    author = UserSerializer()

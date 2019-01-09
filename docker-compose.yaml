@@ -11,7 +11,7 @@ services:
       MYSQL_DATABASE: django_demo
       MYSQL_PASSWORD: qwersadf
     ports:
-      - 8100:80
+      - 8000:80
     depends_on:
       - db
 
