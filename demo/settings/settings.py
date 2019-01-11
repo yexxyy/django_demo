@@ -135,6 +135,7 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.AnonRateThrottle',
         'rest_framework.throttling.UserRateThrottle'
     ),
+    'EXCEPTION_HANDLER': "demo.custom_class.custom_exception_handler"
 }
 
 # Swagger文档配置
