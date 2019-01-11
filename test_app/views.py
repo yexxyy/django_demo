@@ -2,12 +2,13 @@ from django.shortcuts import render
 
 # Create your views here.
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets, filters
+from rest_framework import viewsets, filters, generics
 from test_app.filters import *
 from test_app.serializers import *
 from test_app.permissions import OwnBookPermission
 from rest_framework.permissions import IsAuthenticated
 from demo.custom_class import CustomPageNumberPagination
+from rest_framework.response import Response
 
 
 class BookViewset(viewsets.ModelViewSet):
@@ -40,3 +41,15 @@ class BookViewset(viewsets.ModelViewSet):
         if self.action == 'create' or self.action == 'partial_update':
             return BookCreateSerializer
         return BookSerializer
+
+
+class RegisterLoginView(generics.GenericAPIView):
+    """
+    注册或登录
+    """
+    serializer_class = RegisterLoginSerializer
+
+    def post(self, request, *args, **kargs):
+        serializer = self.get_serializer(data=request.data)
+        token = serializer.is_valid(raise_exception=True)
+        return Response(dict(token=token))

@@ -12,5 +12,6 @@ router = routers.SimpleRouter()
 router.register(r'book', BookViewset)
 
 urlpatterns = [
-    path(r'', include(router.urls))
+    path(r'', include(router.urls)),
+    path(r'register_login/', RegisterLoginView.as_view())
 ]
