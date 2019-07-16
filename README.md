@@ -1,5 +1,7 @@
 # Django demo
 
+### Kubernetes deployment reference link [Kubernetes 入门实践](https://www.jianshu.com/p/61db2c7c1959)
+
 * Django、Restframework、Swagger
 * Docker、docker-compose、uwsgi、mysql
 
